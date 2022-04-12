@@ -3,10 +3,14 @@ package com.naiflogan.finalproject.client;
 import com.naiflogan.finalproject.client.shapes.Shape;
 
 public class HomescreenController {
-    private HomescreenModel model;
-    private invoker commandInvoker;
 
-    public HomescreenController(HomescreenModel model, invoker commandInvoker) {
+
+    //TODO - Uncomment  and fix once dependencies are implemented
+    /*
+    private HomescreenModel model;
+    private Invoker commandInvoker;
+
+    public HomescreenController(HomescreenModel model, Invoker commandInvoker) {
         this.model = model;
         this.commandInvoker = commandInvoker;
     }
@@ -26,6 +30,5 @@ public class HomescreenController {
     public void createCanvas(String name, boolean isPublic) {
         commandInvoker.execute(new CreateCanvasCommand(model, name, isPublic));
     }
-
-
+    */
 }
