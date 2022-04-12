@@ -1,0 +1,4 @@
+Project name: CloudCanvas
+Team members: Logan Mann, Naif Alassaf
+Overview:
+CloudCanvas is a shared canvas application that allows the user to draw artwork on one of a number of shared canvases hosted by the service. As the user draws on the canvas the application updates the state of the canvas on the server. Multiple users can draw on a canvas at the same time and create artwork together.
