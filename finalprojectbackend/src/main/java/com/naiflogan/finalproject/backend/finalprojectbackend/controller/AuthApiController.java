@@ -1,9 +1,5 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.SecureRandom;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.User;
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserRepository;
@@ -11,10 +7,8 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.requests.CreateAcc
 import com.naiflogan.finalproject.backend.finalprojectbackend.requests.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

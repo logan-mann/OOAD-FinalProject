@@ -15,7 +15,6 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.observer.Subject;
 import com.naiflogan.finalproject.backend.finalprojectbackend.requests.AddCanvasRequest;
 import com.naiflogan.finalproject.backend.finalprojectbackend.requests.AddShapeRequest;
 import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
-import com.naiflogan.finalproject.backend.finalprojectbackend.util.Util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
