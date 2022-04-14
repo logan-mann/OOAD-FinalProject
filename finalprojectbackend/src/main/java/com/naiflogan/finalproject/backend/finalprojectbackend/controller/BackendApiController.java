@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.Canvas;
+import com.naiflogan.finalproject.backend.finalprojectbackend.jwt.JwtUtils;
 import com.naiflogan.finalproject.backend.finalprojectbackend.logging.Logger;
 import com.naiflogan.finalproject.backend.finalprojectbackend.observer.Event;
 import com.naiflogan.finalproject.backend.finalprojectbackend.observer.LoggingEvent;
@@ -29,6 +30,9 @@ public class BackendApiController implements Subject {
 
     @Autowired
     private Map<String, Canvas> canvases;
+
+    @Autowired
+    private JwtUtils jwtUtils;
     
     private List<Observer> observers = new ArrayList<Observer>(Arrays.asList(Logger.getInstance()));
 
@@ -39,7 +43,13 @@ public class BackendApiController implements Subject {
 
         final String canvasName = addShapeRequest.getCanvasName();
         final Shape shape = addShapeRequest.getShape();
-        final String username = addShapeRequest.getUsername();
+        final String jwt = addShapeRequest.getJwt();
+
+        if (!jwtUtils.validateJwtToken(jwt)) {
+            return new ResponseEntity<>("Invalid JWT.", HttpStatus.OK);
+        }
+
+        final String username = jwtUtils.getUsernameFromJwt(jwt);
 
         notifyObservers(new LoggingEvent("New AddShapeRequest: {canvasName: " + canvasName + ", username: " + username + ", shapeType: " + shape.getType() + "}", LoggingSeverity.INFO));
 
@@ -60,7 +70,13 @@ public class BackendApiController implements Subject {
     @PostMapping("/add_canvas")
     public ResponseEntity<String> addCanvas(@RequestBody AddCanvasRequest addCanvasRequest) {
         final String canvasName = addCanvasRequest.getCanvasName();
-        final String username = addCanvasRequest.getUsername();
+        final String jwt = addCanvasRequest.getJwt();
+
+        if (!jwtUtils.validateJwtToken(jwt)) {
+            return new ResponseEntity<>("Invalid JWT.", HttpStatus.OK);
+        }
+
+        final String username = jwtUtils.getUsernameFromJwt(jwt);
         final boolean isPublic = addCanvasRequest.isPublic();
         
         notifyObservers(new LoggingEvent("New AddCanvasRequest: {canvasName: " + canvasName + ", username: " + username + "}", LoggingSeverity.INFO));

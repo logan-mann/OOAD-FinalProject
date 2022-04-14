@@ -1,9 +1,8 @@
-package com.naiflogan.finalproject.client;
+package com.naiflogan.finalproject.client.requestsender;
 
-import com.naiflogan.finalproject.client.requests.AddCanvasRequest;
-import com.naiflogan.finalproject.client.requests.AddShapeRequest;
-import com.naiflogan.finalproject.client.requests.CreateAccountRequest;
-import com.naiflogan.finalproject.client.requests.LoginRequest;
+import com.naiflogan.finalproject.client.Constants;
+import com.naiflogan.finalproject.client.request.AddCanvasRequest;
+import com.naiflogan.finalproject.client.request.AddShapeRequest;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,18 +19,6 @@ public class BackendRequestSender {
 
     public static BackendRequestSender getInstance() {
         return instance;
-    }
-
-    public void createAccount(CreateAccountRequest accRequest) {
-        String url = Constants.backendApiUrl + "/create_account";
-        String res = this.restTemplate.postForObject(url, accRequest, String.class);
-        System.out.println(res);
-    }
-
-    public void login(LoginRequest loginRequest) {
-        String url = Constants.backendApiUrl + "/login";
-        String res = this.restTemplate.postForObject(url, loginRequest, String.class);
-        System.out.println(res);
     }
 
     public void addShape(AddShapeRequest shapeRequest) {

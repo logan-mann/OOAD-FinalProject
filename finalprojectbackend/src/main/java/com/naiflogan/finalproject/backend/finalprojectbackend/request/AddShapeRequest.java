@@ -5,18 +5,16 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
 public class AddShapeRequest {
     private Shape shape;
     private String canvasName;
+    private String jwt;
 
-    //TODO - change this to be a JWT rather than username
-    private String username;
-
-    public AddShapeRequest(Shape shape, String canvasName, String username) {
+    public AddShapeRequest(Shape shape, String canvasName, String jwt) {
         this.shape = shape;
         this.canvasName = canvasName;
-        this.username = username;
+        this.jwt = jwt;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getJwt() {
+        return this.jwt;
     }
 
 

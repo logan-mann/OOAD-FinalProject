@@ -1,11 +1,12 @@
-package com.naiflogan.finalproject.client.requests;
+package com.naiflogan.finalproject.client.request;
 
-public class LoginRequest {
+public class CreateAccountRequest {
+
     private String username;
     private String password;
 
 
-    public LoginRequest(String username, String password) {
+    public CreateAccountRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -19,4 +20,7 @@ public class LoginRequest {
     public String getPassword() {
         return this.password;
     }
+
+
+    
 }

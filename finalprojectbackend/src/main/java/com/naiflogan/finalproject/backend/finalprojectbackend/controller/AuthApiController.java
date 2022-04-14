@@ -3,8 +3,10 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.controller;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.User;
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserRepository;
+import com.naiflogan.finalproject.backend.finalprojectbackend.jwt.JwtUtils;
 import com.naiflogan.finalproject.backend.finalprojectbackend.request.CreateAccountRequest;
 import com.naiflogan.finalproject.backend.finalprojectbackend.request.LoginRequest;
+import com.naiflogan.finalproject.backend.finalprojectbackend.responses.LoginResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,9 @@ public class AuthApiController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
 
     @PostMapping("/create_account")
@@ -43,8 +48,8 @@ public class AuthApiController {
 
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    @PostMapping( value = "/login", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 
         final String username = loginRequest.getUsername();
         final String password = loginRequest.getPassword();
@@ -54,12 +59,16 @@ public class AuthApiController {
         try {
             User user = userRepo.getUserByUsername(username);
             if (user != null && passwordEncoder.matches(password, user.getHashedPassword())) {
-                return new ResponseEntity<>("Login successful.", HttpStatus.OK);
+                String jwt = jwtUtils.generateJwt(user);
+                LoginResponse response = new LoginResponse(jwt, null);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
-            return new ResponseEntity<>("Login failed.", HttpStatus.OK);
+            LoginResponse response = new LoginResponse(null, "Login failed.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity<>("Login failed.", HttpStatus.OK);
+            LoginResponse response = new LoginResponse(null, "Login failed.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
 

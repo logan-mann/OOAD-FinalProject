@@ -1,15 +1,13 @@
-package com.naiflogan.finalproject.client.requests;
+package com.naiflogan.finalproject.client.request;
 
 public class AddCanvasRequest {
     private String canvasName;
     private boolean isPublic;
+    private String jwt;
 
-    //TODO - replace with JWT
-    private String username;
-
-    public AddCanvasRequest(String canvasName, String username, boolean isPublic) {
+    public AddCanvasRequest(String canvasName, String jwt, boolean isPublic) {
         this.canvasName = canvasName;
-        this.username = username;
+        this.jwt = jwt;
         this.isPublic = isPublic;
     }
 
@@ -18,8 +16,8 @@ public class AddCanvasRequest {
         return this.canvasName;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getJwt() {
+        return this.jwt;
     }
 
     public boolean isPublic() {
