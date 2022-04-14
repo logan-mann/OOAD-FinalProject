@@ -12,8 +12,8 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.observer.LoggingEv
 import com.naiflogan.finalproject.backend.finalprojectbackend.observer.LoggingSeverity;
 import com.naiflogan.finalproject.backend.finalprojectbackend.observer.Observer;
 import com.naiflogan.finalproject.backend.finalprojectbackend.observer.Subject;
-import com.naiflogan.finalproject.backend.finalprojectbackend.requests.AddCanvasRequest;
-import com.naiflogan.finalproject.backend.finalprojectbackend.requests.AddShapeRequest;
+import com.naiflogan.finalproject.backend.finalprojectbackend.request.AddCanvasRequest;
+import com.naiflogan.finalproject.backend.finalprojectbackend.request.AddShapeRequest;
 import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
 
 import org.springframework.beans.factory.annotation.Autowired;

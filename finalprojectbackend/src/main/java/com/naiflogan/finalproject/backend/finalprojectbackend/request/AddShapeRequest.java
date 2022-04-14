@@ -1,4 +1,4 @@
-package com.naiflogan.finalproject.backend.finalprojectbackend.requests;
+package com.naiflogan.finalproject.backend.finalprojectbackend.request;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
 

@@ -3,8 +3,8 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.controller;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.User;
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserRepository;
-import com.naiflogan.finalproject.backend.finalprojectbackend.requests.CreateAccountRequest;
-import com.naiflogan.finalproject.backend.finalprojectbackend.requests.LoginRequest;
+import com.naiflogan.finalproject.backend.finalprojectbackend.request.CreateAccountRequest;
+import com.naiflogan.finalproject.backend.finalprojectbackend.request.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

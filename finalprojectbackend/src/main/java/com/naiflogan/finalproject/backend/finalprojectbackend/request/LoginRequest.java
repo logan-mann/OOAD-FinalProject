@@ -1,4 +1,4 @@
-package com.naiflogan.finalproject.backend.finalprojectbackend.requests;
+package com.naiflogan.finalproject.backend.finalprojectbackend.request;
 
 public class LoginRequest {
     private String username;
