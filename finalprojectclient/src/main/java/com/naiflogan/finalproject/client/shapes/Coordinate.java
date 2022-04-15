@@ -2,10 +2,10 @@ package com.naiflogan.finalproject.client.shapes;
 
 public class Coordinate {
 
-    public final double x;
-    public final double y;
+    public final int x;
+    public final int y;
 
-    public Coordinate(double x, double y) {
+    public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }

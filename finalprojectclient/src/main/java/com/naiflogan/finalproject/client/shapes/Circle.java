@@ -1,11 +1,13 @@
 package com.naiflogan.finalproject.client.shapes;
 
+import java.awt.*;
+
 public class Circle extends Shape {
 
-    private double radius;
+    private int radius;
     private Coordinate center;
 
-    public Circle(double radius, Coordinate center) {
+    public Circle(int radius, Coordinate center) {
         this.radius = radius;
         this.center = center;
     }
@@ -20,6 +22,10 @@ public class Circle extends Shape {
 
     public ShapeType getType() {
         return ShapeType.CIRCLE;
+    }
+
+    public void draw(Graphics g) {
+        g.drawOval(center.x - radius, center.y - radius, radius*2, radius*2);
     }
     
 }

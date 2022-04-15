@@ -1,5 +1,9 @@
 package com.naiflogan.finalproject.client;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 import com.naiflogan.finalproject.client.request.AddCanvasRequest;
 import com.naiflogan.finalproject.client.request.AddShapeRequest;
 import com.naiflogan.finalproject.client.request.CreateAccountRequest;
@@ -9,6 +13,10 @@ import com.naiflogan.finalproject.client.requestsender.BackendRequestSender;
 import com.naiflogan.finalproject.client.shapes.Circle;
 import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Line;
+import com.naiflogan.finalproject.client.shapes.Rectangle;
+import com.naiflogan.finalproject.client.view.AppView;
+import com.naiflogan.finalproject.client.view.AuthView;
+import com.naiflogan.finalproject.client.canvas.Canvas;
 
 /**
  * Hello world!
@@ -21,12 +29,16 @@ public final class App {
      * Says hello to the world.
      * @param args The arguments of the program.
      */
+
+    JPanel cards;
+    
     public static void main(String[] args) {
         try {
             BackendRequestSender sender = BackendRequestSender.getInstance();
             AuthRequestSender authSender = AuthRequestSender.getInstance();
-            //CreateAccountRequest createAcc = new CreateAccountRequest("loganmann8", "testPass579");
-            LoginRequest login = new LoginRequest("loganmann8", "testPass579");
+            CreateAccountRequest createAcc = new CreateAccountRequest("loganmann", "testPass579");
+            authSender.createAccount(createAcc);
+            LoginRequest login = new LoginRequest("loganmann", "testPass579");
             String jwt = authSender.login(login);
             
             Coordinate start = new Coordinate(5, 6);
@@ -39,10 +51,24 @@ public final class App {
             sender.addCanvas(request0);
             sender.addShape(request1);
             sender.addShape(request2);
-            //sender.createAccount(createAcc);
         } catch (Exception e) {
 
         }
 
+        //AppView appView = new AppView();
+        //appView.createAndShowGui();
+
+        JFrame frame = new JFrame("CloudCanvas");
+        JPanel holder = new JPanel();
+        //holder.add(new AuthView());
+        Canvas canvas = new Canvas();
+        canvas.addShape(new Circle(100, new Coordinate(200,200)));
+        canvas.addShape(new Rectangle(new Coordinate(200,200), 50, 100));
+        holder.add(canvas);
+        holder.setSize(new Dimension(600,600));
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(700,700);
+        frame.setContentPane(holder);
+        frame.setVisible(true);
     }
 }
