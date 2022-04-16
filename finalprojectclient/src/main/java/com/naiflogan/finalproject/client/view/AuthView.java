@@ -2,27 +2,58 @@ package com.naiflogan.finalproject.client.view;
 
 
 import javax.swing.*;
+
+import com.naiflogan.finalproject.client.mediator.AuthMediator;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class AuthView extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
 
-    JPanel cards;
+    private JPanel cards;
 
     final static String LOGIN_PANEL = "Login Panel";
     final static String SELECTION_PANEL = "Selection Panel";
+    final static String CREATE_ACCOUNT_PANEL = "Create Account Panel";
 
     private boolean usernameModified = false;
     private boolean passwordModified = false;
+    private AuthMediator authMediator;
 
     public AuthView() {
-
+        authMediator = new AuthMediator(this);
         cards = new JPanel(new CardLayout());
         JPanel selectionPanel = selectionPanel();
         JPanel loginPanel = loginPanel();
+        JPanel createAccountPanel = new CreateAccountView(authMediator);
         cards.add(selectionPanel, SELECTION_PANEL);
         cards.add(loginPanel, LOGIN_PANEL);
+        cards.add(createAccountPanel, CREATE_ACCOUNT_PANEL);
         this.add(cards, BorderLayout.CENTER);
+    }
+
+    public void showPreviousView() {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+                
+        cl.previous(cards);
+    }
+
+    public void showLoginView() {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+                
+        cl.show(cards, LOGIN_PANEL);
+    }
+
+    public void showCreateAccountView() {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+                
+        cl.show(cards, CREATE_ACCOUNT_PANEL);
+    }
+
+    public void showSelectionView() {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+                
+        cl.show(cards, SELECTION_PANEL);
     }
 
     private JPanel loginPanel() {
@@ -111,7 +142,7 @@ public class AuthView extends JPanel implements ActionListener, MouseListener, M
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Create Account Pushed");
+                authMediator.showCreateAccountView();
             }
         });
 
@@ -134,6 +165,10 @@ public class AuthView extends JPanel implements ActionListener, MouseListener, M
 
         selectionPanel.add(centerPanel, BorderLayout.CENTER);
         return selectionPanel;
+    }
+
+    public JPanel getCards() {
+        return this.cards;
     }
 
     @Override

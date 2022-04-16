@@ -60,11 +60,11 @@ public final class App {
 
         JFrame frame = new JFrame("CloudCanvas");
         JPanel holder = new JPanel();
-        //holder.add(new AuthView());
+        holder.add(new AuthView());
         Canvas canvas = new Canvas();
         canvas.addShape(new Circle(100, new Coordinate(200,200)));
         canvas.addShape(new Rectangle(new Coordinate(200,200), 50, 100));
-        holder.add(canvas);
+        //holder.add(canvas);
         holder.setSize(new Dimension(600,600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(700,700);
