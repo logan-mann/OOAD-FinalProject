@@ -2,12 +2,15 @@ package com.naiflogan.finalproject.client.shapes;
 
 import java.awt.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Line extends Shape {
 
     private Coordinate start;
     private Coordinate end;
 
-    public Line(Coordinate start, Coordinate end) {
+    public Line(@JsonProperty("start") Coordinate start, 
+                @JsonProperty("end")Coordinate end) {
         this.start = start;
         this.end = end;
     }

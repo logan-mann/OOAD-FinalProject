@@ -4,6 +4,7 @@ import com.naiflogan.finalproject.client.Constants;
 import com.naiflogan.finalproject.client.request.CreateAccountRequest;
 import com.naiflogan.finalproject.client.request.LoginRequest;
 import com.naiflogan.finalproject.client.responses.LoginResponse;
+import com.naiflogan.finalproject.client.user.User;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -29,22 +30,20 @@ public class AuthRequestSender {
     }
 
     /*
-        Returns JWT string on successful login, or empty string on login failure
+        Returns User object on successful login, or null on login failure
     */
-    public String login(LoginRequest loginRequest) {
+    public User login(LoginRequest loginRequest) {
         String url = Constants.backendApiUrl + "/login";
-        System.out.println("hellooooo");
 
         try {
             LoginResponse res = this.restTemplate.postForObject(url, loginRequest, LoginResponse.class);
-            
             if (res.getError() == null) {
-                System.out.println("Token: " + res.getJsonWebToken());
-                return res.getJsonWebToken();
+                System.out.println("Token: " + res.getUser().getJsonWebToken());
+                return res.getUser();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "";
+        return null;
     }
 }

@@ -6,7 +6,6 @@ import javax.swing.*;
 import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.mediator.AuthMediator;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.awt.event.*;

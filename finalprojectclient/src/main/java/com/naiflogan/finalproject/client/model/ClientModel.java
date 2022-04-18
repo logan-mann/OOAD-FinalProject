@@ -1,35 +1,48 @@
 package com.naiflogan.finalproject.client.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
+import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.View;
 
 public class ClientModel implements Model {
 
-    private String jwt;
+    private User user;
     private boolean loggedIn;
 
     private Canvas currentCanvas;
+    private Map<String, Canvas> canvases;
 
     private List<View> attachedViews;
 
     public ClientModel() {
-        this.jwt = "";
+        this.user = null;
         this.loggedIn = false;
-        this.currentCanvas = new Canvas();
+        this.currentCanvas = null;
+        this.canvases = new HashMap<>();
         this.attachedViews = new ArrayList<>();
     }
 
-
-    public String getJwt() {
-        return this.jwt;
+    public Map<String, Canvas> getCanvases() {
+        return canvases;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public void setCanvases(Map<String, Canvas> canvases) {
+        this.canvases = canvases;
+    }
+
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isLoggedIn() {

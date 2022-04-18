@@ -5,8 +5,6 @@ import javax.swing.*;
 import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.mediator.AuthMediator;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -21,7 +19,12 @@ public class LoginView extends JPanel {
     public LoginView(AuthMediator mediator, AuthController authController){
         authMediator = mediator;
         this.authController = authController;
+        renderUi();
+    }
+    
 
+    private void renderUi() {
+        this.removeAll();
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
@@ -93,8 +96,8 @@ public class LoginView extends JPanel {
 
 
         this.add(centerPanel, BorderLayout.CENTER);
+
     }
-    
 }
 
 

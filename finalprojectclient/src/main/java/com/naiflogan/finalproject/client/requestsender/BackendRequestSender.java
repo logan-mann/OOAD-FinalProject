@@ -1,9 +1,15 @@
 package com.naiflogan.finalproject.client.requestsender;
 
+import java.util.Map;
+
 import com.naiflogan.finalproject.client.Constants;
+import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.request.AddCanvasRequest;
 import com.naiflogan.finalproject.client.request.AddShapeRequest;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,5 +41,16 @@ public class BackendRequestSender {
 
         //TODO - will change this to render result on GUI later
         System.out.println(res);
+    }
+
+    public Map<String, Canvas> getCanvases(String jwt) {
+        String url = Constants.backendApiUrl + "/get_canvases";
+        ParameterizedTypeReference<Map<String, Canvas>> responseType = 
+        new ParameterizedTypeReference<Map<String, Canvas>>() {};
+        
+        RequestEntity<String> request = RequestEntity.post(url).accept(MediaType.APPLICATION_JSON).body(jwt);
+
+        Map<String, Canvas> res = this.restTemplate.exchange(request, responseType).getBody();
+        return res;
     }
 }

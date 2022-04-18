@@ -2,12 +2,14 @@ package com.naiflogan.finalproject.client.shapes;
 
 import java.awt.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Circle extends Shape {
 
     private int radius;
     private Coordinate center;
 
-    public Circle(int radius, Coordinate center) {
+    public Circle(@JsonProperty("radius") int radius, @JsonProperty("center")Coordinate center) {
         this.radius = radius;
         this.center = center;
     }

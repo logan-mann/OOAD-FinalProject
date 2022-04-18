@@ -1,8 +1,6 @@
 package com.naiflogan.finalproject.client;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 import com.naiflogan.finalproject.client.request.AddCanvasRequest;
 import com.naiflogan.finalproject.client.request.AddShapeRequest;
@@ -13,10 +11,8 @@ import com.naiflogan.finalproject.client.requestsender.BackendRequestSender;
 import com.naiflogan.finalproject.client.shapes.Circle;
 import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Line;
-import com.naiflogan.finalproject.client.shapes.Rectangle;
+import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.AppView;
-import com.naiflogan.finalproject.client.view.AuthView;
-import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 
@@ -44,15 +40,15 @@ public final class App {
             CreateAccountRequest createAcc = new CreateAccountRequest("loganmann", "testPass579");
             authSender.createAccount(createAcc);
             LoginRequest login = new LoginRequest("loganmann", "testPass579");
-            String jwt = authSender.login(login);
+            User user = authSender.login(login);
             
-            Coordinate start = new Coordinate(5, 6);
-            Coordinate end = new Coordinate(7,8);
+            Coordinate start = new Coordinate(100, 100);
+            Coordinate end = new Coordinate(300,300);
             Line newLine = new Line(start, end);
-            Circle newCircle = new Circle(5, new Coordinate(0,0));
-            AddCanvasRequest request0 = new AddCanvasRequest("testCanvas", jwt, true);
-            AddShapeRequest request1 = new AddShapeRequest(newLine, "testCanvas", jwt);
-            AddShapeRequest request2 = new AddShapeRequest(newCircle, "testCanvas", jwt);
+            Circle newCircle = new Circle(50, new Coordinate(100,100));
+            AddCanvasRequest request0 = new AddCanvasRequest("testCanvas", user.getJsonWebToken(), true);
+            AddShapeRequest request1 = new AddShapeRequest(newLine, "testCanvas", user.getJsonWebToken());
+            AddShapeRequest request2 = new AddShapeRequest(newCircle, "testCanvas", user.getJsonWebToken());
             sender.addCanvas(request0);
             sender.addShape(request1);
             sender.addShape(request2);
