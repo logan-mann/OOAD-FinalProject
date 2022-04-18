@@ -11,5 +11,4 @@ public class Canvas {
     private String name;
     private boolean isPublic;
     private Set<String> allowedUsernames;
-    
 }
