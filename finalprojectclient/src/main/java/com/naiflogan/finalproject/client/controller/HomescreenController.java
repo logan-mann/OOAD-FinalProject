@@ -1,4 +1,4 @@
-package com.naiflogan.finalproject.client;
+package com.naiflogan.finalproject.client.controller;
 
 import com.naiflogan.finalproject.client.shapes.Shape;
 

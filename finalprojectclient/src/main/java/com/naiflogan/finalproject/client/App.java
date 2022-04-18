@@ -16,12 +16,17 @@ import com.naiflogan.finalproject.client.shapes.Line;
 import com.naiflogan.finalproject.client.shapes.Rectangle;
 import com.naiflogan.finalproject.client.view.AppView;
 import com.naiflogan.finalproject.client.view.AuthView;
-import com.naiflogan.finalproject.client.canvas.Canvas;
+import com.naiflogan.finalproject.client.canvas.CanvasPanel;
+import com.naiflogan.finalproject.client.controller.AuthController;
+import com.naiflogan.finalproject.client.model.ClientModel;
 
 /**
  * Hello world!
  */
 public final class App {
+
+
+    
     private App() {
     }
 
@@ -59,16 +64,12 @@ public final class App {
         //appView.createAndShowGui();
 
         JFrame frame = new JFrame("CloudCanvas");
-        JPanel holder = new JPanel();
-        holder.add(new AuthView());
-        Canvas canvas = new Canvas();
-        canvas.addShape(new Circle(100, new Coordinate(200,200)));
-        canvas.addShape(new Rectangle(new Coordinate(200,200), 50, 100));
-        //holder.add(canvas);
-        holder.setSize(new Dimension(600,600));
+        ClientModel clientModel = new ClientModel();
+        AuthController authController = new AuthController(clientModel);
+        AppView appView = new AppView(clientModel, authController);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(700,700);
-        frame.setContentPane(holder);
+        frame.setContentPane(appView);
         frame.setVisible(true);
     }
 }

@@ -2,7 +2,10 @@ package com.naiflogan.finalproject.client.view;
 
 import javax.swing.*;
 
+import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.mediator.AuthMediator;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,8 +16,11 @@ public class LoginView extends JPanel {
     private boolean passwordFocused;
     private AuthMediator authMediator;
 
-    public LoginView(AuthMediator mediator){
+    private AuthController authController;
+
+    public LoginView(AuthMediator mediator, AuthController authController){
         authMediator = mediator;
+        this.authController = authController;
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
@@ -65,7 +71,8 @@ public class LoginView extends JPanel {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Login Pushed");
+                System.out.println("HERE HERE HERE");
+                authController.login(usernameField.getText(), new String(passwordField.getPassword()));
             }
         });
 

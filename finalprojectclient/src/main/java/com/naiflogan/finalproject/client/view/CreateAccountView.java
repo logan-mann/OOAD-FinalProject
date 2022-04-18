@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.mediator.AuthMediator;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -20,8 +23,11 @@ public class CreateAccountView extends JPanel {
 
     private AuthMediator authMediator;
 
-    public CreateAccountView(AuthMediator mediator) {
-        this.authMediator = mediator;
+    private AuthController authController;
+
+    public CreateAccountView(AuthMediator mediator, AuthController authController){
+        authMediator = mediator;
+        this.authController = authController;
 
         //Create panel to house everything and set layout to vertical layout (stack elements)
         JPanel centerPanel = new JPanel();
@@ -182,7 +188,7 @@ public class CreateAccountView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("Create Account Pushed");
+                authController.createAccount(username, password);
             }
         });
 
@@ -204,7 +210,7 @@ public class CreateAccountView extends JPanel {
 
         //Add button panel to main view
         centerPanel.add(buttonPanel);
-        //Center components vertically
+        //Center java.awt.Components vertically
         centerPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         //Add main view to encapsulating view
