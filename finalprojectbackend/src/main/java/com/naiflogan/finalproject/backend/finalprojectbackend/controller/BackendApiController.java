@@ -2,8 +2,10 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.Canvas;
 import com.naiflogan.finalproject.backend.finalprojectbackend.jwt.JwtUtils;
@@ -94,9 +96,25 @@ public class BackendApiController implements Subject {
         return new ResponseEntity<>("Canvas successfully created!", HttpStatus.OK);
     }
 
-    @GetMapping("/get_canvases")
-    Map<String, Canvas> getCanvases() {
-        return canvases;
+    //Takes in a jwt, if this is a valid token, returns all the canvases that user can see
+    @PostMapping("/get_canvases")
+    Map<String, Canvas> getCanvases(@RequestBody String jwt) {
+        if (!jwtUtils.validateJwtToken(jwt)) {
+            return new HashMap<>();
+        }
+        String username = jwtUtils.getUsernameFromJwt(jwt);
+
+        Map<String, Canvas> resultMap = new HashMap<>();
+
+        for (Entry<String, Canvas> entry : this.canvases.entrySet()) {
+            String canvasName = entry.getKey();
+            Canvas canvas = entry.getValue();
+            if (canvas.getAllowedUsernames().contains(username) || canvas.isPublic()) {
+                resultMap.put(canvasName, canvas);
+            }
+        }
+        return resultMap;
+
     }
 
     public void notifyObservers(Event event) {

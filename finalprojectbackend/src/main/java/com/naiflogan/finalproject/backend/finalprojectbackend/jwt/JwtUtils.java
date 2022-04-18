@@ -2,7 +2,7 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.jwt;
 
 import java.util.Date;
 
-import com.naiflogan.finalproject.backend.finalprojectbackend.database.User;
+import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserEntity;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class JwtUtils {
     @Value("${auth.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwt(User user) {
+    public String generateJwt(UserEntity user) {
         return Jwts.builder()
         .setSubject(user.getUsername())
         .setIssuedAt(new Date())

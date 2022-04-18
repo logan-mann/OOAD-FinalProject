@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.naiflogan.finalproject.backend.finalprojectbackend.database.User;
+import com.naiflogan.finalproject.backend.finalprojectbackend.user.User;
+import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserEntity;
 import com.naiflogan.finalproject.backend.finalprojectbackend.database.UserRepository;
 import com.naiflogan.finalproject.backend.finalprojectbackend.jwt.JwtUtils;
 import com.naiflogan.finalproject.backend.finalprojectbackend.logging.Logger;
@@ -70,10 +71,11 @@ public class AuthApiController implements Subject {
 
 
         try {
-            User user = userRepo.getUserByUsername(username);
-            if (user != null && passwordEncoder.matches(password, user.getHashedPassword())) {
-                String jwt = jwtUtils.generateJwt(user);
-                LoginResponse response = new LoginResponse(jwt, null);
+            UserEntity userEntity = userRepo.getUserByUsername(username);
+            if (userEntity != null && passwordEncoder.matches(password, userEntity.getHashedPassword())) {
+                String jwt = jwtUtils.generateJwt(userEntity);
+                User user = new User(userEntity.getUsername(), jwt);
+                LoginResponse response = new LoginResponse(user, null);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
             LoginResponse response = new LoginResponse(null, "Login failed.");

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<UserEntity, Integer>{
     
     @Modifying
     @Transactional
@@ -14,6 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     void createUser(@Param("username") String username, @Param("hashed_password") String hashedPassword);
 
     @Query(value="SELECT * FROM users WHERE username = :username", nativeQuery = true)
-    User getUserByUsername(@Param("username") String username);
+    UserEntity getUserByUsername(@Param("username") String username);
     
 }

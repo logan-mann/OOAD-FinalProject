@@ -1,20 +1,20 @@
-package com.naiflogan.finalproject.backend.finalprojectbackend;
+package com.naiflogan.finalproject.backend.finalprojectbackend.user;
 
 public class User {
     private String username;
-    private String token;
+    private String jsonWebToken;
 
     public User( String username, String token ) {
         this.username = username;
-        this.token = token;
+        this.jsonWebToken = token;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getToken() {
-        return token;
+    public String getJsonWebToken() {
+        return jsonWebToken;
     }
 
 }
