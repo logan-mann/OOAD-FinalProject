@@ -13,7 +13,9 @@ import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Line;
 import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.AppView;
+import com.naiflogan.finalproject.client.view.HomescreenView;
 import com.naiflogan.finalproject.client.controller.AuthController;
+import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 
 /**
@@ -46,10 +48,16 @@ public final class App {
             Coordinate end = new Coordinate(300,300);
             Line newLine = new Line(start, end);
             Circle newCircle = new Circle(50, new Coordinate(100,100));
+            Circle secondCircle = new Circle(150, new Coordinate(200, 250));
             AddCanvasRequest request0 = new AddCanvasRequest("testCanvas", user.getJsonWebToken(), true);
+            AddCanvasRequest request3 = new AddCanvasRequest("testCanvas2", user.getJsonWebToken(), true);
             AddShapeRequest request1 = new AddShapeRequest(newLine, "testCanvas", user.getJsonWebToken());
             AddShapeRequest request2 = new AddShapeRequest(newCircle, "testCanvas", user.getJsonWebToken());
+            AddShapeRequest request4 = new AddShapeRequest(secondCircle, "testCanvas2", user.getJsonWebToken());
+
             sender.addCanvas(request0);
+            sender.addCanvas(request3);
+            sender.addShape(request4);
             sender.addShape(request1);
             sender.addShape(request2);
         } catch (Exception e) {
@@ -62,9 +70,10 @@ public final class App {
         JFrame frame = new JFrame("CloudCanvas");
         ClientModel clientModel = new ClientModel();
         AuthController authController = new AuthController(clientModel);
-        AppView appView = new AppView(clientModel, authController);
+        HomescreenController homescreenController = new HomescreenController(clientModel);
+        AppView appView = new AppView(clientModel, authController, homescreenController);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(700,700);
+        frame.setSize(900,800);
         frame.setContentPane(appView);
         frame.setVisible(true);
     }

@@ -37,7 +37,7 @@ public class LoginCommand implements Command {
             clientModel.setCanvases(canvasesMap);
             if (!canvasesMap.entrySet().isEmpty()) {
                 Canvas canvas = canvasesMap.values().iterator().next();
-                clientModel.setCurrentCanvas(canvas);
+                clientModel.setCurrentCanvas(canvas.getName());
             }
             clientModel.setLoggedIn(true);
             

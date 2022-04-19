@@ -3,6 +3,7 @@ package com.naiflogan.finalproject.client.shapes;
 import java.awt.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 
 public class Circle extends Shape {
 
@@ -23,11 +24,19 @@ public class Circle extends Shape {
     }
 
     public ShapeType getType() {
-        return ShapeType.CIRCLE;
+        return ShapeType.Circle;
     }
 
-    public void draw(Graphics g) {
-        g.drawOval(center.x - radius, center.y - radius, radius*2, radius*2);
+    public void draw(Graphics g, CanvasPanel canvas) {
+        Dimension dim = canvas.getSize();
+        double dimX = dim.getWidth();
+        double dimY = dim.getHeight();
+        int centerX = (int) (dimX/CanvasPanel.DEFAULT_SIZE * center.x);
+        int centerY = (int) (dimY/CanvasPanel.DEFAULT_SIZE * center.y);
+
+        int newRadius = (int) (dimX/CanvasPanel.DEFAULT_SIZE * radius);
+
+        g.drawOval(centerX - newRadius, centerY - newRadius, newRadius*2, newRadius*2);
     }
     
 }

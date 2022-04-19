@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.naiflogan.finalproject.client.canvas.Canvas;
-import com.naiflogan.finalproject.client.canvas.CanvasPanel;
+import com.naiflogan.finalproject.client.shapes.ShapeType;
+import com.naiflogan.finalproject.client.strategy.CircleCreationStrategy;
+import com.naiflogan.finalproject.client.strategy.ShapeCreationStrategy;
 import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.View;
 
@@ -20,40 +22,72 @@ public class ClientModel implements Model {
 
     private List<View> attachedViews;
 
+    private ShapeType currentShapeType;
+    private ShapeCreationStrategy shapeCreationStrategy;
+
+    public List<View> getAttachedViews() {
+        return this.attachedViews;
+    }
+
+    public void setAttachedViews(List<View> attachedViews) {
+        this.attachedViews = attachedViews;
+    }
+    public void setCurrentShapeType(ShapeType currentShapeType) {
+        this.currentShapeType = currentShapeType;
+    }
+
+    public ShapeCreationStrategy getShapeCreationStrategy() {
+        return this.shapeCreationStrategy;
+    }
+
+    public void setShapeCreationStrategy(ShapeCreationStrategy shapeCreationStrategy) {
+        this.shapeCreationStrategy = shapeCreationStrategy;
+    }
+
     public ClientModel() {
         this.user = null;
         this.loggedIn = false;
         this.currentCanvas = null;
         this.canvases = new HashMap<>();
         this.attachedViews = new ArrayList<>();
+        this.currentShapeType = ShapeType.Circle;
+        this.shapeCreationStrategy = new CircleCreationStrategy();
     }
 
-    public Map<String, Canvas> getCanvases() {
+    public   Map<String, Canvas> getCanvases() {
         return canvases;
     }
 
-    public void setCanvases(Map<String, Canvas> canvases) {
+    public   void setCanvases(Map<String, Canvas> canvases) {
         this.canvases = canvases;
     }
 
+    public void setShapeType(ShapeType type) {
+        this.currentShapeType = type;
+    }
 
-    public User getUser() {
+    public ShapeType getCurrentShapeType() {
+        return currentShapeType;
+    }
+
+
+    public   User getUser() {
         return this.user;
     }
 
-    public void setUser(User user) {
+    public   void setUser(User user) {
         this.user = user;
     }
 
-    public boolean isLoggedIn() {
+    public   boolean isLoggedIn() {
         return this.loggedIn;
     }
 
-    public boolean getLoggedIn() {
+    public   boolean getLoggedIn() {
         return this.loggedIn;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
+    public   void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
 
@@ -61,26 +95,29 @@ public class ClientModel implements Model {
         return this.currentCanvas;
     }
 
-    public void setCurrentCanvas(Canvas currentCanvas) {
-        this.currentCanvas = currentCanvas;
+    public void setCurrentCanvas(String canvasName) {
+        if (canvases.containsKey(canvasName)){
+            this.currentCanvas = canvases.get(canvasName);
+        }
     }
 
 
     @Override
     public void attach(View view) {
-        this.attachedViews.add(view);
+        attachedViews.add(view);
     }
 
     @Override
     public void detach(View view) {
-        this.attachedViews.remove(view);
+        attachedViews.remove(view);
     }
 
     @Override
     public void notifyViews() {
-        for (View view : attachedViews) {
+        List<View> views = new ArrayList<>(attachedViews);
+        for (View view : views) {
             view.update();
-        }        
+        }
     }
 
     

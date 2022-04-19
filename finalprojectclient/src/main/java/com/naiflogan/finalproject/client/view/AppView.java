@@ -3,6 +3,7 @@ package com.naiflogan.finalproject.client.view;
 import javax.swing.*;
 
 import com.naiflogan.finalproject.client.controller.AuthController;
+import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 
 import java.awt.*;
@@ -20,12 +21,12 @@ public class AppView extends JPanel implements View{
     }
 
 
-    public AppView(ClientModel clientModel, AuthController authController) {
+    public AppView(ClientModel clientModel, AuthController authController, HomescreenController homescreenController) {
         this.clientModel = clientModel;
         clientModel.attach(this);
 
         AuthView authView = new AuthView(authController);
-        HomescreenView homescreenView = new HomescreenView(clientModel);
+        HomescreenView homescreenView = new HomescreenView(clientModel, homescreenController);
         cards = new JPanel(new CardLayout());
         cards.add(homescreenView, ViewName.HOMESCREEN_VIEW.name());
         cards.add(authView, ViewName.AUTH_VIEW.name());

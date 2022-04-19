@@ -2,6 +2,8 @@ package com.naiflogan.finalproject.client.shapes;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.naiflogan.finalproject.client.canvas.CanvasPanel;
+
 import java.awt.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "shapeType")
@@ -16,7 +18,7 @@ public abstract class Shape {
     public Shape() {
     }
 
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, CanvasPanel canvas);
 
     public abstract ShapeType getType(); 
 }

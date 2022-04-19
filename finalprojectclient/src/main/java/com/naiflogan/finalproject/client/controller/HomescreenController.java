@@ -1,8 +1,26 @@
 package com.naiflogan.finalproject.client.controller;
 
+import com.naiflogan.finalproject.client.canvas.Canvas;
+import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.Shape;
 
 public class HomescreenController {
+
+    private ClientModel clientModel;
+
+    public HomescreenController(ClientModel clientModel) {
+        this.clientModel = clientModel;
+    }
+
+    public void placeShape(Shape shape) {
+        
+    }
+
+
+    public void switchCanvas(String canvasName) {
+        clientModel.setCurrentCanvas(canvasName);
+        clientModel.notifyViews();
+    }
 
 
     //TODO - Uncomment  and fix once dependencies are implemented

@@ -3,6 +3,7 @@ package com.naiflogan.finalproject.client.shapes;
 import java.awt.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 
 public class Rectangle extends Shape {
     private Coordinate center;
@@ -15,11 +16,23 @@ public class Rectangle extends Shape {
         this.length = length;
     }
 
-    public void draw(Graphics g) {
-        g.drawLine(center.x - length/2, center.y + height/2, center.x + length/2, center.y + height/2);
-        g.drawLine(center.x - length/2, center.y - height/2, center.x + length/2, center.y - height/2);
-        g.drawLine(center.x + length/2, center.y - height/2, center.x + length/2, center.y + height/2);
-        g.drawLine(center.x - length/2, center.y - height/2, center.x - length/2, center.y + height/2);
+    public void draw(Graphics g, CanvasPanel canvas) {
+        Dimension dim = canvas.getSize();
+        System.out.println(dim.getWidth() + " " + dim.getHeight());
+        int dimX = (int) dim.getWidth();
+        int dimY = (int) dim.getHeight();
+
+        int centerX = (dimX/CanvasPanel.DEFAULT_SIZE) * center.x;
+        int centerY = (dimY/CanvasPanel.DEFAULT_SIZE) * center.y;
+
+        int newLength = (dimX/CanvasPanel.DEFAULT_SIZE) * length;
+        int newHeight = (dimY/CanvasPanel.DEFAULT_SIZE) * height;
+
+
+        g.drawLine(centerX - newLength/2, centerY + newHeight/2, centerX + newLength/2, centerY + newHeight/2);
+        g.drawLine(centerX - newLength/2, centerY - newHeight/2, centerX + newLength/2, centerY - newHeight/2);
+        g.drawLine(centerX + newLength/2, centerY - newHeight/2, centerX + newLength/2, centerY + newHeight/2);
+        g.drawLine(centerX - newLength/2, centerY - newHeight/2, centerX - newLength/2, centerY + newHeight/2);
     }
 
     public ShapeType getType() {
