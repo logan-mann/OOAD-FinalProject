@@ -22,6 +22,7 @@ public class UpdateCanvasStateCommand implements Command {
         User user = clientModel.getUser();
         Map<String, Canvas> newCanvasMap = backendRequestSender.getCanvases(user.getJsonWebToken());
         clientModel.updateCanvasState(newCanvasMap);
+        System.out.println("NUMBER OF SHAPES:" + clientModel.getCurrentCanvas().getShapes().size());
         clientModel.notifyViews();
     }
 

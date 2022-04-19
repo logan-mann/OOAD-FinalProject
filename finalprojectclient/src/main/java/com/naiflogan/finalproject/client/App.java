@@ -13,7 +13,6 @@ import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Line;
 import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.AppView;
-import com.naiflogan.finalproject.client.view.HomescreenView;
 import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
@@ -76,16 +75,5 @@ public final class App {
         frame.setSize(900,800);
         frame.setContentPane(appView);
         frame.setVisible(true);
-
-        while (true) {
-            if (clientModel.isLoggedIn()) {
-                homescreenController.updateCanvasState();
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-
-            }
-        }
     }
 }
