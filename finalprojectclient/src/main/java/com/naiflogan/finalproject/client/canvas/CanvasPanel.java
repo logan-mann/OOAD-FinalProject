@@ -10,7 +10,6 @@ import com.naiflogan.finalproject.client.shapes.Shape;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.*;
 
 public class CanvasPanel extends JPanel {
 
@@ -70,6 +69,12 @@ public class CanvasPanel extends JPanel {
         this.hover = hover;
         this.revalidate();
         this.repaint();
+    }
+
+    public void setShapes(List<Shape> shapes) {
+        this.shapes = shapes;
+        revalidate();
+        repaint();
     }
     
 }

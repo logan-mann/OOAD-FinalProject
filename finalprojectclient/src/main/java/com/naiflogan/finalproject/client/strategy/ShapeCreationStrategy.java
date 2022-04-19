@@ -3,10 +3,8 @@ package com.naiflogan.finalproject.client.strategy;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
-import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
-import com.naiflogan.finalproject.client.shapes.Coordinate;
 
 public interface ShapeCreationStrategy {
 

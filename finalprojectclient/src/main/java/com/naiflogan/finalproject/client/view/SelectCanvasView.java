@@ -1,23 +1,18 @@
 package com.naiflogan.finalproject.client.view;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.MouseInputListener;
 
 import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
-import com.naiflogan.finalproject.client.model.ClientModel;
 
 public class SelectCanvasView extends JPanel implements View {
-
-    private static int count = 0;
 
     private Map<String, Canvas> canvases;
     private HomescreenController homescreenController;
@@ -39,6 +34,13 @@ public class SelectCanvasView extends JPanel implements View {
             this.add(canvasList);
     }
 
+    public void setCanvases(Map<String, Canvas> canvases) {
+        this.canvases = canvases;
+        renderUi();
+        revalidate();
+        repaint();
+    }
+
 
     //Helper function to build list item for canvas
     private JPanel getCanvasListItem(Canvas canvas) {
@@ -56,45 +58,29 @@ public class SelectCanvasView extends JPanel implements View {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 System.out.println("Mouse Clicked");
-                homescreenController.switchCanvas(canvas.getName());        
-
-                
+                homescreenController.switchCanvas(canvas.getName());
             }
-
             @Override
-            public void mouseEntered(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
+            public void mouseEntered(MouseEvent arg0) {                
             }
-
             @Override
             public void mouseExited(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
             }
-
             @Override
-            public void mousePressed(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
+            public void mousePressed(MouseEvent arg0) {                
             }
 
             @Override
             public void mouseReleased(MouseEvent arg0) {
-                // TODO Auto-generated method stub
                 
             }
 
             @Override
-            public void mouseDragged(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
+            public void mouseDragged(MouseEvent arg0) {                
             }
 
             @Override
-            public void mouseMoved(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
+            public void mouseMoved(MouseEvent arg0) {                
             }
             
         });

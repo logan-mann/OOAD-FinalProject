@@ -13,6 +13,8 @@ public class HomescreenView extends JPanel implements View {
 
     private ClientModel clientModel;
     private HomescreenController homescreenController;
+    private CanvasPanel canvasPanel;
+
 
     public HomescreenView(ClientModel clientModel, HomescreenController homescreenController) {
         this.clientModel = clientModel;
@@ -34,8 +36,13 @@ public class HomescreenView extends JPanel implements View {
 
         if (clientModel.getCurrentCanvas() != null) {
             JPanel canvasHolder = new JPanel();
-            CanvasPanel canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes());
+            if (canvasPanel == null) {
+                canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes());
+            } else {
+                canvasPanel.setShapes(clientModel.getCurrentCanvas().getShapes());
+            }
             canvasHolder.add(canvasPanel);
+
             MouseInputListener listener = clientModel.getShapeCreationStrategy().getShapeCreationListener(canvasPanel, homescreenController);
             bottomPanel.add(clientModel.getShapeCreationStrategy().getShapePropertiesMenu(canvasPanel));
             canvasPanel.addMouseListener(listener);

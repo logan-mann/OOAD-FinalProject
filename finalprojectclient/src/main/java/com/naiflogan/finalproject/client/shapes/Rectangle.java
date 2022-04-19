@@ -36,7 +36,7 @@ public class Rectangle extends Shape {
     }
 
     public ShapeType getType() {
-        return ShapeType.RECTANGLE;
+        return ShapeType.Rectangle;
     }
     
 }

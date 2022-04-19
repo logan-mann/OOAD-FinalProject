@@ -19,10 +19,8 @@ public class AuthView extends JPanel {
     final static String CREATE_ACCOUNT_PANEL = "Create Account Panel";
 
     private AuthMediator authMediator;
-    private AuthController authController;
 
     public AuthView(AuthController authController) {
-        this.authController = authController;
         authMediator = new AuthMediator(this);
         cards = new JPanel(new CardLayout());
         JPanel selectionPanel = selectionPanel();

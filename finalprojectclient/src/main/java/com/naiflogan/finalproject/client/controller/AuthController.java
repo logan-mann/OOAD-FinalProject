@@ -4,9 +4,7 @@ import com.naiflogan.finalproject.client.command.CommandInvoker;
 import com.naiflogan.finalproject.client.command.LoginCommand;
 import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.request.CreateAccountRequest;
-import com.naiflogan.finalproject.client.request.LoginRequest;
 import com.naiflogan.finalproject.client.requestsender.AuthRequestSender;
-import com.naiflogan.finalproject.client.user.User;
 
 
 public class AuthController {

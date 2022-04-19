@@ -101,6 +101,11 @@ public class ClientModel implements Model {
         }
     }
 
+    public void updateCanvasState(Map<String, Canvas> newCanvasMap) {
+        this.canvases = newCanvasMap;
+        this.currentCanvas = newCanvasMap.get(currentCanvas.getName());
+    }
+
 
     @Override
     public void attach(View view) {
@@ -118,6 +123,7 @@ public class ClientModel implements Model {
         for (View view : views) {
             view.update();
         }
+        System.out.println(views.size());
     }
 
     

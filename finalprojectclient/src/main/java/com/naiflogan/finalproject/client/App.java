@@ -76,5 +76,16 @@ public final class App {
         frame.setSize(900,800);
         frame.setContentPane(appView);
         frame.setVisible(true);
+
+        while (true) {
+            if (clientModel.isLoggedIn()) {
+                homescreenController.updateCanvasState();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+
+            }
+        }
     }
 }
