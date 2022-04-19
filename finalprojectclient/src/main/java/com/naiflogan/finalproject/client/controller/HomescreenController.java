@@ -5,7 +5,6 @@ import com.naiflogan.finalproject.client.command.PlaceShapeCommand;
 import com.naiflogan.finalproject.client.command.UpdateCanvasStateCommand;
 import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.Shape;
-import com.naiflogan.finalproject.client.user.User;
 
 public class HomescreenController {
 
@@ -32,7 +31,6 @@ public class HomescreenController {
 
     public void updateCanvasState() {
         if (clientModel.isLoggedIn()) {
-            User user = clientModel.getUser();
             UpdateCanvasStateCommand updateCommand = new UpdateCanvasStateCommand(clientModel);
             commandInvoker.setCommand(updateCommand);
             commandInvoker.executeCommand();
