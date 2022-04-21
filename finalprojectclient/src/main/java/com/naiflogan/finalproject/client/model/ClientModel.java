@@ -9,6 +9,7 @@ import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.shapes.ColorConstants;
 import com.naiflogan.finalproject.client.shapes.ShapeType;
 import com.naiflogan.finalproject.client.strategy.CircleCreationStrategy;
+import com.naiflogan.finalproject.client.strategy.LineCreationStrategy;
 import com.naiflogan.finalproject.client.strategy.ShapeCreationStrategy;
 import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.View;
@@ -25,6 +26,8 @@ public class ClientModel implements Model {
 
     private ShapeType currentShapeType;
     private ShapeCreationStrategy shapeCreationStrategy;
+
+    private boolean isOnCreateCanvasScreen;
 
     //Must be hex string
     private String currentPenColor;
@@ -54,9 +57,18 @@ public class ClientModel implements Model {
         this.currentCanvas = null;
         this.canvases = new HashMap<>();
         this.attachedViews = new ArrayList<>();
-        this.currentShapeType = ShapeType.CIRCLE;
-        this.shapeCreationStrategy = new CircleCreationStrategy();
+        this.currentShapeType = ShapeType.LINE;
+        this.shapeCreationStrategy = new LineCreationStrategy();
         this.currentPenColor = ColorConstants.RED;
+        this.isOnCreateCanvasScreen = false;
+    }
+
+    public boolean isOnCreateCanvasScreen() {
+        return isOnCreateCanvasScreen;
+    }
+
+    public void setIsOnCreateCanvasScreen(boolean isOnCreateCanvasScreen) {
+        this.isOnCreateCanvasScreen = isOnCreateCanvasScreen; 
     }
 
     public void setCurrentPenColor(String hexColor) {

@@ -30,6 +30,7 @@ public class RectangleCreationStrategy implements ShapeCreationStrategy {
 
         JPanel propertiesMenu = new JPanel();
         propertiesMenu.setLayout(new BoxLayout(propertiesMenu, BoxLayout.Y_AXIS));
+        //propertiesMenu.setPreferredSize(new Dimension(180,500));
         
         JLabel lengthDisplay = new JLabel("Length: " + length);
         JPanel lengthPanel = new JPanel();
@@ -114,11 +115,11 @@ public class RectangleCreationStrategy implements ShapeCreationStrategy {
     }
 
     private String getLengthLabelText() {
-        return "length: " + length;
+        return "Length: " + length;
     }
 
     private String getHeightLabelText() {
-        return "length: " + length;
+        return "Height: " + height;
     }
 
     @Override

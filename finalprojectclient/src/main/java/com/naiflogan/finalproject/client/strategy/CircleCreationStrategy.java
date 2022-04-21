@@ -28,6 +28,8 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
         JLabel radiusDisplay = new JLabel("Radius: " + radius);
 
         JPanel propertiesMenu = new JPanel();
+        propertiesMenu.setPreferredSize(new Dimension(180,500));
+
         propertiesMenu.setLayout(new BoxLayout(propertiesMenu, BoxLayout.Y_AXIS));
         JPanel radiusPanel = new JPanel();
         radiusPanel.setLayout(new BoxLayout(radiusPanel, BoxLayout.Y_AXIS));

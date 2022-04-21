@@ -70,7 +70,7 @@ public final class App {
         HomescreenController homescreenController = new HomescreenController(clientModel);
         AppView appView = new AppView(clientModel, authController, homescreenController);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(900,800);
+        frame.setSize(1000,800);
         frame.setContentPane(appView);
         frame.setVisible(true);
 

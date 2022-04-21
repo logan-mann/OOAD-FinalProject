@@ -17,7 +17,8 @@ public class AppView extends JPanel implements View{
 
     private static enum ViewName {
         AUTH_VIEW,
-        HOMESCREEN_VIEW
+        HOMESCREEN_VIEW,
+        CREATE_CANVAS_VIEW
     }
 
 
@@ -27,9 +28,11 @@ public class AppView extends JPanel implements View{
 
         AuthView authView = new AuthView(authController);
         HomescreenView homescreenView = new HomescreenView(clientModel, homescreenController);
+        CreateCanvasView createCanvasView = new CreateCanvasView(homescreenController);
         cards = new JPanel(new CardLayout());
         cards.add(homescreenView, ViewName.HOMESCREEN_VIEW.name());
         cards.add(authView, ViewName.AUTH_VIEW.name());
+        cards.add(createCanvasView, ViewName.CREATE_CANVAS_VIEW.name());
         this.add(cards, BorderLayout.CENTER);
         update();
     }
@@ -42,7 +45,11 @@ public class AppView extends JPanel implements View{
     @Override
     public void update() {
         if (clientModel.isLoggedIn()) {
-            showView(ViewName.HOMESCREEN_VIEW);
+            if (clientModel.isOnCreateCanvasScreen()) {
+                showView(ViewName.CREATE_CANVAS_VIEW);
+            } else {
+                showView(ViewName.HOMESCREEN_VIEW);
+            }
         } else {
             showView(ViewName.AUTH_VIEW);
         }

@@ -30,6 +30,7 @@ public class PenSelectionView extends JPanel implements View {
         this.colorButtons = new HashMap<>();
         this.removeAll();
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.setPreferredSize(new Dimension(500,100));
         renderUi();
     }
 
@@ -53,6 +54,7 @@ public class PenSelectionView extends JPanel implements View {
                 });
                 colorButton.setBackground(Color.decode(colorHexVal));
                 this.add(colorButton);
+                this.add(Box.createRigidArea(new Dimension(5, 0)));
                 this.colorButtons.put(color, colorButton);
 
             }

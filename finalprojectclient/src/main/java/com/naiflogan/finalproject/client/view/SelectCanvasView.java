@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
+import javax.swing.event.MouseInputAdapter;
 
 import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
@@ -15,33 +15,44 @@ import com.naiflogan.finalproject.client.model.ClientModel;
 
 public class SelectCanvasView extends JPanel implements View {
 
-    private Map<String, Canvas> canvases;
     private HomescreenController homescreenController;
     private ClientModel clientModel;
+    private JPanel canvasList;
 
     public SelectCanvasView(Map<String,Canvas> canvases, HomescreenController homescreenController, ClientModel clientModel) {
-        this.canvases = canvases;
         this.homescreenController = homescreenController;
         this.clientModel = clientModel;
-        renderUi();
-    }
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        canvasList = new JPanel();
+        canvasList.setLayout(new BoxLayout(canvasList, BoxLayout.Y_AXIS));
+        this.add(canvasList);
+        canvasList.setAutoscrolls(true);
+        JScrollPane scrollPane = new JScrollPane(canvasList);
+        scrollPane.setPreferredSize(new Dimension(200,500));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(8);
+        JPanel scrollHolder = new JPanel();
+        scrollHolder.add(scrollPane);
+        this.add(scrollHolder);
 
-    private void renderUi() {
-            JPanel canvasList = new JPanel();
-            canvasList.setLayout(new BoxLayout(canvasList, BoxLayout.Y_AXIS));
-            this.removeAll();
-            for (Entry<String, Canvas> entry : canvases.entrySet()) {
-                Canvas canvas = entry.getValue();
-                canvasList.add(getCanvasListItem(canvas));
+        JButton gotoCreateCanvasButton = new JButton("Create New Canvas");
+        gotoCreateCanvasButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                homescreenController.goToCreateCanvasView();
             }
-            this.add(canvasList);
+            
+        });
+        this.add(gotoCreateCanvasButton);
+        setCanvases(canvases);
     }
 
     public void setCanvases(Map<String, Canvas> canvases) {
-        this.canvases = canvases;
-        renderUi();
-        revalidate();
-        repaint();
+        canvasList.removeAll();
+        for (Entry<String, Canvas> entry : canvases.entrySet()) {
+            Canvas canvas = entry.getValue();
+            canvasList.add(getCanvasListItem(canvas));
+        }
     }
 
 
@@ -56,34 +67,11 @@ public class SelectCanvasView extends JPanel implements View {
         holder.add(canvasPreviewPanel);
         canvasListItem.add(holder);
         canvasListItem.setPreferredSize(new Dimension(150,150));
-        canvasPreviewPanel.addMouseListener(new MouseInputListener() {
+        canvasPreviewPanel.addMouseListener(new MouseInputAdapter() {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                System.out.println("Mouse Clicked");
                 homescreenController.switchCanvas(canvas.getName());
-            }
-            @Override
-            public void mouseEntered(MouseEvent arg0) {                
-            }
-            @Override
-            public void mouseExited(MouseEvent arg0) {
-            }
-            @Override
-            public void mousePressed(MouseEvent arg0) {                
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent arg0) {
-                
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent arg0) {                
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent arg0) {                
             }
             
         });
@@ -92,7 +80,7 @@ public class SelectCanvasView extends JPanel implements View {
 
     @Override
     public void update() {
-        this.renderUi();
+        this.setCanvases(clientModel.getCanvases());
     }
     
 }

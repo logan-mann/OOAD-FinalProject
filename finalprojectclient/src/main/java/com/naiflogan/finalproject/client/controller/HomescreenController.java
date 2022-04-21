@@ -1,10 +1,13 @@
 package com.naiflogan.finalproject.client.controller;
 
+import com.naiflogan.finalproject.client.command.ChangeShapeTypeCommand;
 import com.naiflogan.finalproject.client.command.CommandInvoker;
+import com.naiflogan.finalproject.client.command.CreateCanvasCommand;
 import com.naiflogan.finalproject.client.command.PlaceShapeCommand;
 import com.naiflogan.finalproject.client.command.UpdateCanvasStateCommand;
 import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.Shape;
+import com.naiflogan.finalproject.client.shapes.ShapeType;
 
 public class HomescreenController {
 
@@ -47,31 +50,27 @@ public class HomescreenController {
         this.clientModel.notifyViews();
     }
 
-
-    //TODO - Uncomment  and fix once dependencies are implemented
-    /*
-    private HomescreenModel model;
-    private Invoker commandInvoker;
-
-    public HomescreenController(HomescreenModel model, Invoker commandInvoker) {
-        this.model = model;
-        this.commandInvoker = commandInvoker;
+    public void setCurrentShapeType(ShapeType shapeType) {
+        ChangeShapeTypeCommand command = new ChangeShapeTypeCommand(shapeType, clientModel);
+        commandInvoker.setCommand(command);
+        commandInvoker.executeCommand();
     }
 
-    public void placeShapes(Shape) {
-        commandInvoker.execute(new PlaceShapeCommand(model, shape));
+    public void goToCreateCanvasView() {
+        this.clientModel.setIsOnCreateCanvasScreen(true);
+        clientModel.notifyViews();
     }
 
-    public void switchShapeType(ShapeType shapeType) {
-        commandInvoker.execute(new SwitchShapeTypeCommand(model, shapeType));
+    public void goToHomescreenView() {
+        this.clientModel.setIsOnCreateCanvasScreen(false);
+        clientModel.notifyViews();
     }
 
-    public void switchCanvas(Canvas canvas) {
-        commandInvoker.execute(new SwitchCanvasCommand(model, canvas));
+    public void createNewCanvas(String canvasName, boolean isPublic) {
+        CreateCanvasCommand createCommand = new CreateCanvasCommand(canvasName, isPublic, clientModel);
+        commandInvoker.setCommand(createCommand);
+        commandInvoker.executeCommand();
+        updateCanvasState();
+        goToHomescreenView();
     }
-
-    public void createCanvas(String name, boolean isPublic) {
-        commandInvoker.execute(new CreateCanvasCommand(model, name, isPublic));
-    }
-    */
 }

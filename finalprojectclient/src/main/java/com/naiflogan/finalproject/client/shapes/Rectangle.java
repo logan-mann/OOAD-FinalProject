@@ -46,15 +46,16 @@ public class Rectangle extends Shape {
 
 
     public void draw(Graphics g, CanvasPanel canvas) {
-
         Dimension dim = canvas.getSize();
-        int dimX = (int) dim.getWidth();
-        int dimY = (int) dim.getHeight();
-        int centerX = (dimX/CanvasPanel.DEFAULT_SIZE) * center.x;
-        int centerY = (dimY/CanvasPanel.DEFAULT_SIZE) * center.y;
+        double dimX = dim.getWidth();
+        double dimY = dim.getHeight();
 
-        int newLength = (dimX/CanvasPanel.DEFAULT_SIZE) * length;
-        int newHeight = (dimY/CanvasPanel.DEFAULT_SIZE) * height;
+
+        int centerX = (int) (dimX/CanvasPanel.DEFAULT_SIZE * center.x);
+        int centerY = (int) (dimY/CanvasPanel.DEFAULT_SIZE * center.y);
+
+        int newLength = (int) (dimX/CanvasPanel.DEFAULT_SIZE * length);
+        int newHeight = (int) (dimX/CanvasPanel.DEFAULT_SIZE * height);
 
 
         g.drawLine(centerX - newLength/2, centerY + newHeight/2, centerX + newLength/2, centerY + newHeight/2);
