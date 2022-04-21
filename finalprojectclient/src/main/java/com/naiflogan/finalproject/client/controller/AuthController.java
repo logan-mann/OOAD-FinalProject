@@ -1,22 +1,19 @@
 package com.naiflogan.finalproject.client.controller;
 
 import com.naiflogan.finalproject.client.command.CommandInvoker;
+import com.naiflogan.finalproject.client.command.CreateAccountCommand;
 import com.naiflogan.finalproject.client.command.LoginCommand;
 import com.naiflogan.finalproject.client.model.ClientModel;
-import com.naiflogan.finalproject.client.request.CreateAccountRequest;
-import com.naiflogan.finalproject.client.requestsender.AuthRequestSender;
 
 
 public class AuthController {
 
     private ClientModel clientModel;
     private CommandInvoker commandInvoker;
-    private AuthRequestSender authRequestSender;
 
     public AuthController(ClientModel clientModel) {
         this.clientModel = clientModel;
         this.commandInvoker = CommandInvoker.getInstance();
-        this.authRequestSender = AuthRequestSender.getInstance();
     }
 
     public void login(String username, String password) {
@@ -32,9 +29,9 @@ public class AuthController {
     }
 
     public void createAccount(String username, String password) {
-
-        CreateAccountRequest createAccountRequest = new CreateAccountRequest(username, password);
-        authRequestSender.createAccount(createAccountRequest);
+        CreateAccountCommand command = new CreateAccountCommand(username, password);
+        commandInvoker.setCommand(command);
+        commandInvoker.executeCommand();
     }
 
 

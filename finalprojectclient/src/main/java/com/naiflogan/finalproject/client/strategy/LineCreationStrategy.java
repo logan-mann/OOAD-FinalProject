@@ -17,8 +17,8 @@ import com.naiflogan.finalproject.client.shapes.Line;
 
 public class LineCreationStrategy implements ShapeCreationStrategy {
 
-    private Coordinate firstClick;
-    private Coordinate secondClick;
+    private Coordinate firstClickLocation;
+    private Coordinate secondClickLocation;
 
     @Override
     public JPanel getShapePropertiesMenu(CanvasPanel canvasPanel, HomescreenController homescreenController) {
@@ -45,21 +45,21 @@ public class LineCreationStrategy implements ShapeCreationStrategy {
                     public void mouseClicked(MouseEvent arg0) {
                         Coordinate center = new Coordinate(arg0.getX(), arg0.getY());
 
-                        if (firstClick == null) {
-                            firstClick = center;
+                        if (firstClickLocation == null) {
+                            firstClickLocation = center;
                         } else {
-                            secondClick = center;
-                            Line newLine = new Line(firstClick, secondClick, homescreenController.getClientModelPenColor());
-                            firstClick = null;
-                            secondClick = null;
+                            secondClickLocation = center;
+                            Line newLine = new Line(firstClickLocation, secondClickLocation, homescreenController.getClientModelPenColor());
+                            firstClickLocation = null;
+                            secondClickLocation = null;
                             homescreenController.placeShape(newLine);
                         }            
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
-                        firstClick = null;
-                        secondClick = null;
+                        firstClickLocation = null;
+                        secondClickLocation = null;
                         canvasPanel.setHover(new Circle(0, new Coordinate(0,0), homescreenController.getClientModelPenColor()));
                     }
 
@@ -67,11 +67,11 @@ public class LineCreationStrategy implements ShapeCreationStrategy {
                     public void mouseMoved(MouseEvent arg0) {
                         Coordinate center = new Coordinate(arg0.getX(), arg0.getY());
 
-                        if (firstClick == null) {
+                        if (firstClickLocation == null) {
                             Circle newHoverCircle = new Circle(3, center, homescreenController.getClientModelPenColor());
                             canvasPanel.setHover(newHoverCircle);
                         } else {
-                            Line newHoverLine = new Line(firstClick, center, homescreenController.getClientModelPenColor());
+                            Line newHoverLine = new Line(firstClickLocation, center, homescreenController.getClientModelPenColor());
                             canvasPanel.setHover(newHoverLine);
                         }
                     }

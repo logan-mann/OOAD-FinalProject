@@ -18,7 +18,6 @@ public class CanvasPanel extends JPanel implements View {
 
     private List<Shape> shapes;
 
-    private int radius = 15;
     private Shape hover;
     public final static int DEFAULT_SIZE = 500;
     private Dimension preferredSize = new Dimension(DEFAULT_SIZE,DEFAULT_SIZE);
@@ -31,11 +30,9 @@ public class CanvasPanel extends JPanel implements View {
     public CanvasPanel(ClientModel clientModel) {
         this.setBackground(Color.WHITE);
         this.shapes = new ArrayList<>();
-        this.hover = new Circle(radius, new Coordinate(0, 0), "0x000000");
-        //this.addMouseMotionListener(this);
+        this.hover = new Circle(0, new Coordinate(0, 0), "0x000000");
         this.setBorder(new LineBorder(Color.BLACK));
         this.clientModel = clientModel;
-        //this.clientModel.attach(this);
     }
 
     public Dimension getPreferredSize() {
@@ -44,12 +41,10 @@ public class CanvasPanel extends JPanel implements View {
 
     public CanvasPanel(List<Shape> shapes, ClientModel clientModel) {
         this.setBackground(Color.WHITE);
-        this.hover = new Circle(radius, new Coordinate(0, 0), "0x000000");
+        this.hover = new Circle(0, new Coordinate(0, 0), "0x000000");
         this.shapes = shapes;
-        //this.addMouseMotionListener(this);
         this.setBorder(new LineBorder(Color.BLACK));
         this.clientModel = clientModel;
-        //this.clientModel.attach(this);
     }
 
     public void setPreferredSize(Dimension dim) {

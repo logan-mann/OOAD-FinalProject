@@ -13,6 +13,10 @@ import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 
+
+/**
+ * This view displays a scrollable menu of available canvases and allows the user to select from them
+ */
 public class SelectCanvasView extends JPanel implements View {
 
     private HomescreenController homescreenController;
@@ -20,20 +24,29 @@ public class SelectCanvasView extends JPanel implements View {
     private JPanel canvasList;
 
     public SelectCanvasView(Map<String,Canvas> canvases, HomescreenController homescreenController, ClientModel clientModel) {
+        //Set member variables
         this.homescreenController = homescreenController;
         this.clientModel = clientModel;
+        //this.clientModel.attach(this);
+        //Set panel layout manager (Vertical Box Layout)
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        //Initialize canvasList JPanel (Holds all canvas selection panels)
         canvasList = new JPanel();
         canvasList.setLayout(new BoxLayout(canvasList, BoxLayout.Y_AXIS));
-        this.add(canvasList);
         canvasList.setAutoscrolls(true);
+
+        //Create a scroll view for canvas list
         JScrollPane scrollPane = new JScrollPane(canvasList);
         scrollPane.setPreferredSize(new Dimension(200,500));
         scrollPane.getVerticalScrollBar().setUnitIncrement(8);
+
+        //Add Panel to hold scroll pane
         JPanel scrollHolder = new JPanel();
         scrollHolder.add(scrollPane);
         this.add(scrollHolder);
 
+        //Button to navigate to create canvas screen
         JButton gotoCreateCanvasButton = new JButton("Create New Canvas");
         gotoCreateCanvasButton.addActionListener(new ActionListener() {
 
@@ -44,11 +57,15 @@ public class SelectCanvasView extends JPanel implements View {
             
         });
         this.add(gotoCreateCanvasButton);
-        setCanvases(canvases);
+        //Initialize canvas list to current set of canvases
+        setCanvasList(canvases);
     }
 
-    public void setCanvases(Map<String, Canvas> canvases) {
+
+    public void setCanvasList(Map<String, Canvas> canvases) {
+        //Clear current components from panel
         canvasList.removeAll();
+        //For each canvas in the entry set, create a component for it, add it to canvasList panel
         for (Entry<String, Canvas> entry : canvases.entrySet()) {
             Canvas canvas = entry.getValue();
             canvasList.add(getCanvasListItem(canvas));
@@ -56,17 +73,24 @@ public class SelectCanvasView extends JPanel implements View {
     }
 
 
-    //Helper function to build list item for canvas
+    //Helper function to build list item component for a canvas
     private JPanel getCanvasListItem(Canvas canvas) {
+        //Create outer panel to house subcomponents
         JPanel canvasListItem = new JPanel();
         canvasListItem.setLayout(new BoxLayout(canvasListItem, BoxLayout.Y_AXIS));
+        //Add a label with canvas name
         canvasListItem.add(new JLabel(canvas.getName()));
+        //Create a CanvasPanel to display canvas contents
         CanvasPanel canvasPreviewPanel = new CanvasPanel(canvas.getShapes(), clientModel);
-        JPanel holder = new JPanel();
         canvasPreviewPanel.setPreferredSize(new Dimension(100,100));
+
+        //Panel to hold CanvasPanel
+        JPanel holder = new JPanel();
         holder.add(canvasPreviewPanel);
         canvasListItem.add(holder);
         canvasListItem.setPreferredSize(new Dimension(150,150));
+
+        //Add adapter to switch canvases when clicked
         canvasPreviewPanel.addMouseListener(new MouseInputAdapter() {
 
             @Override
@@ -78,9 +102,10 @@ public class SelectCanvasView extends JPanel implements View {
         return canvasListItem;
     }
 
+    //When updated, reset the canvas list
     @Override
     public void update() {
-        this.setCanvases(clientModel.getCanvases());
+        this.setCanvasList(clientModel.getCanvases());
     }
     
 }

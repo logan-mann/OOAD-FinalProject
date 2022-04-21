@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputAdapter;
 
+import java.awt.*;
+
 import com.naiflogan.finalproject.client.Utils;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
@@ -25,7 +27,6 @@ public class ShapeSelectionView extends JPanel implements View {
     public ShapeSelectionView(ClientModel clientModel, HomescreenController homescreenController) {
         this.clientModel = clientModel;
         this.homescreenController = homescreenController;
-        this.clientModel.attach(this);
         this.shapeButtons = new HashMap<>();
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         renderUi();
@@ -57,9 +58,12 @@ public class ShapeSelectionView extends JPanel implements View {
         }
     }
 
+    public void paintComponent(Graphics g) {
+        renderUi();
+    }
+
     @Override
     public void update() {
-        renderUi();
         revalidate();
         repaint();
         

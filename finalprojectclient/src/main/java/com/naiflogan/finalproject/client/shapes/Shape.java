@@ -18,8 +18,6 @@ public abstract class Shape {
 
     public abstract void draw(Graphics g, CanvasPanel canvas);
 
-    public abstract ShapeType getType(); 
-
     public String getHexColor() {
         return hexColor;
     }

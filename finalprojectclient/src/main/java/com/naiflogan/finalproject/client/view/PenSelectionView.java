@@ -35,30 +35,43 @@ public class PenSelectionView extends JPanel implements View {
     }
 
     public void renderUi() {
+
+        //For each color in ColorConstants enum
         for (ColorConstants.Colors color : ColorConstants.Colors.values()) {
+
+            //Initialize button and colorHexVal
             JPanel colorButton;
             String colorHexVal;
 
+            //If a button has already been created for this color, set vars appropriately
             if (colorButtons.containsKey(color)) {
                 colorButton = colorButtons.get(color);
                 colorHexVal = ColorConstants.Colors.getColorHexValue(color);
+            
+            //Else create new button, get hexVal for current color
             } else {
                 colorButton = new JPanel();
                 colorHexVal = ColorConstants.Colors.getColorHexValue(color);
                 colorButton.setPreferredSize(new Dimension(50,50));
+                //Add listener to set current pen color when button is pressed
                 colorButton.addMouseListener(new MouseInputAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         homescreenController.setCurrentPenColor(colorHexVal);
                     }
                 });
+                //Set the background color of the button appropriately
                 colorButton.setBackground(Color.decode(colorHexVal));
+                //Add color button to the main component
                 this.add(colorButton);
+                //Add spacing between each button
                 this.add(Box.createRigidArea(new Dimension(5, 0)));
+                //Add current button to map
                 this.colorButtons.put(color, colorButton);
 
             }
 
+            //Set the selected color to look like it is pressed, others to look like not pressed
             if (colorHexVal.equals(clientModel.getCurrentPenColor())) {
                 colorButton.setBorder(BorderFactory.createLoweredBevelBorder());
             } else {

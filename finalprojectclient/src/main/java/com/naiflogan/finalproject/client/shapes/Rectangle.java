@@ -63,13 +63,5 @@ public class Rectangle extends Shape {
         g.drawLine(centerX + newLength/2, centerY - newHeight/2, centerX + newLength/2, centerY + newHeight/2);
         g.drawLine(centerX - newLength/2, centerY - newHeight/2, centerX - newLength/2, centerY + newHeight/2);
     }
-
-    public ShapeType getType() {
-        return ShapeType.RECTANGLE;
-    }
-
-    public String toString() {
-        return "Center: " + center + " Length: "+ length + "Height: " + height + " Color: " + hexColor;
-    }
     
 }

@@ -15,8 +15,6 @@ public class LoginCommand implements Command {
     private ClientModel clientModel;
     private String username;
     private String password;
-    private AuthRequestSender authRequestSender = AuthRequestSender.getInstance();
-    private BackendRequestSender backendRequestSender = BackendRequestSender.getInstance();
 
     public LoginCommand(String username, String password, ClientModel clientModel) {
         this.username = username;
@@ -27,6 +25,8 @@ public class LoginCommand implements Command {
 
     @Override
     public void execute() {
+        AuthRequestSender authRequestSender = AuthRequestSender.getInstance();
+        BackendRequestSender backendRequestSender= BackendRequestSender.getInstance();
 
         System.out.println("running this");
         LoginRequest loginRequest = new LoginRequest(username, password);

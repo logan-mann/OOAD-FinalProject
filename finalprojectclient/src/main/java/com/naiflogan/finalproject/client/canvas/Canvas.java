@@ -6,6 +6,11 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.naiflogan.finalproject.client.shapes.Shape;
 
+
+/**
+ * This is the datamodel class for the canvases in the service.
+ * Holds pertinent info about each canvas
+ */
 public class Canvas {
 
     private List<Shape> shapes;
@@ -38,10 +43,6 @@ public class Canvas {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isIsPublic() {
-        return this.isPublic;
     }
 
     public boolean getIsPublic() {

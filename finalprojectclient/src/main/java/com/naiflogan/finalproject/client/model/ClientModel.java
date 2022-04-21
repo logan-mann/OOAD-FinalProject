@@ -147,7 +147,6 @@ public class ClientModel implements Model {
         for (View view : views) {
             view.update();
         }
-        System.out.println("ClientModel observers: " + views.size());
     }
 
     

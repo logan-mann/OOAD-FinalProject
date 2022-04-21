@@ -1,0 +1,415 @@
+class Canvas {
+  -String name
+  -List<Shape> shapes
+  -boolean isPublic
+  -Set<String> allowedUsernames
+}
+
+class Coordinate {
+  -int x
+  -int y
+}
+
+abstract class Shape {
+    -String hexColor
+    +draw()
+}
+
+class Line extends Shape {
+  -Coordinate start
+  -Coordinate end
+}
+
+class Circle extends Shape {
+  -Coordinate center
+  -int radius
+}
+
+class Rectangle extends Shape {
+  -Coordinate center
+  -int length
+  -int width
+}
+
+class CanvasPanel implements View {
+    +{static} int DEFAULT_SIZE
+    -private List<Shape> shapes
+    -private Shape hover
+    -Dimension preferredSize
+    -ClientModel clientModel
+    -MouseInputListener mouseListener
+
+    +addShape(Shape shape)
+    +paintComponent(Graphics g)
+    +update()
+}
+
+interface Command {
+    +execute()
+}
+
+class ChangeShapeCommand implements Command {
+    -ShapeType shapeType
+    -ClientModel clientModel
+}
+
+ChangeShapeCommand -> ShapeType
+ChangeShapeCommand -> ClientModel
+
+class CommandInvoker {
+    -{static} CommandInvoker instance
+    -Command command
+
+    +getInstance()
+    +setCommand(Command command)
+    +executeCommand()
+}
+
+CommandInvoker -> Command
+ShapeSelectionView -> Utils
+
+class CreateCanvasCommand implements Command {
+    -ClientModel
+    -String canvasName
+    -isPublic
+}
+
+ChangeShapeCommand -> ShapeCreationStrategyFactory
+
+CreateCanvasCommand -> ClientModel
+CreateCanvasCommand -> BackendRequestSender
+
+class LoginCommand implements Command {
+    -ClientModel clientModel
+    -String username
+    -String password
+}
+
+LoginCommand -> BackendRequestSender
+LoginCommand -> AuthRequestSender
+LoginCommand -> ClientModel
+
+CanvasPanel -> Shape
+CanvasPanel -> ClientModel
+
+class NullCommand implements Command {
+
+}
+
+class PlaceShapeCommand implements Command {
+    -Shape shape
+    -String canvasName
+    -ClientModel clientModel
+}
+
+PlaceShapeCommand -> BackendRequestSender
+PlaceShapeCommand -> ClientModel
+PlaceShapeCommand -> Shape
+
+class UpdateCanvasStateCommand implements Command {
+    -ClientModel clientModel
+}
+
+UpdateCanvasStateCommand -> BackendRequestSender
+UpdateCanvasStateCommand -> ClientModel
+
+class AuthController {
+    -ClientModel clientModel
+    -CommandInvoker commandInvoker
+
+    +login(String username, String password)
+    +logout()
+    +createAccount(String username, String password)
+}
+
+AuthController -> ClientModel
+AuthController -> CommandInvoker
+
+class CreateAccountCommand implements Command {
+    -String username
+    -String password
+}
+
+CreateAccountCommand -> AuthRequestSender
+
+class HomescreenController {
+    -ClientModel clientModel
+    -CommandInvoker commandInvoker
+
+    +placeShape(Shape shape)
+    +switchCanvas(String canvasName)
+    +updateCanvasState()
+    +setCurrentPenColor(String penColor)
+    +setCurrentShapeType(ShapeType shapeType)
+    +goToCreateCanvasView()
+    +goToHomescreenView()
+    +createNewCanvas(String canvasName, boolean isPublic)
+
+}
+
+HomescreenController -> ClientModel
+HomescreenController -> CommandInvoker
+
+class ShapeCreationStrategyFactory {
+    +{static}getShapeCreationStrategy(ShapeType shapeType)
+}
+
+
+class ClientModel implements Model {
+    -User user
+    -boolean loggedIn
+    -Canvas currentCanvas
+    -Map<String, Canvas> canvases
+    -List<View> attachedViews
+    -ShapeType currentShapeType
+    -ShapeCreationStrategy shapeCreationStrategy
+    -boolean isOnCreateCanvasScreen
+    -String currentPenColor
+
+    +attach(View view)
+    +detach(View view)
+    +notifyViews()
+}
+
+ClientModel -> User
+ClientModel -> Canvas
+ClientModel -> View
+ClientModel -> ShapeType
+ClientModel -> ShapeCreationStrategy
+
+interface Model {
+    +attach(View view)
+    +detach(View view)
+    +notifyViews()
+}
+
+class AddCanvasRequest {
+    -String canvasName
+    -boolean isPublic
+    -String jwt
+}
+
+class AddShapeRequest {
+    -Shape shape
+    -String canvasName
+    -String jwt
+}
+
+class CreateAccountRequest {
+    -String username
+    -String password
+}
+
+class LoginRequest {
+    -String username
+    -String password
+}
+
+class AuthRequestSender {
+    -{static} AuthRequestSender instance
+
+    +getInstance()
+    +createAccount(CreateAccountRequest createAccountRequest)
+    +login(LoginRequest loginRequest)
+}
+
+AuthRequestSender -> CreateAccountRequest
+AuthRequestSender -> LoginRequest
+
+class BackendRequestSender {
+    -{static} BackendRequestSender instance
+
+    +getInstance()
+    +addShape(AddShapeRequest addShapeRequest)
+    +addCanvas(AddCanvasRequest addCanvasRequest)
+    +getCanvases(String jwt)
+}
+
+BackendRequestSender -> AddShapeRequest
+BackendRequestSender -> AddCanvasRequest
+
+class CircleCreationStrategy implements ShapeCreationStrategy {
+    -int radius
+    -Coordinate lastMouseLocation
+}
+
+CircleCreationStrategy -> Coordinate
+
+class LineCreationStrategy implements ShapeCreationStrategy {
+    -Coordinate firstClickLocation
+    -Coordinate secondClickLocation
+}
+
+LineCreationStrategy -> Coordinate
+
+class RectangleCreationStrategy implements ShapeCreationStrategy {
+    -int length
+    -int height
+    -Coordinate lastMouseLocation
+}
+
+RectangleCreationStrategy -> Coordinate
+
+interface ShapeCreationStrategy {
+    +getShapePropertiesMenu(CanvasPanel canvasPanel, HomescreenController homescreenController)
+    +getShapeCreationListener(CanvasPanel canvasPanel, HomescreenController homescreenController)
+}
+
+ShapeCreationStrategy -> CanvasPanel
+ShapeCreationStrategy -> HomescreenController
+
+class User {
+    -String username
+    -String jsonWebToken
+}
+
+class AppView implements View {
+    -ClientModel clientModel
+    -JPanel cards
+
+    -{static} enum ViewName{
+        AUTH_VIEW,
+        HOMESCREEN_VIEW,
+        CREATE_CANVAS_VIEW
+    }
+
+    +showView(ViewName viewName)
+    +update()
+}
+
+AppView -> ClientModel
+
+class AuthView extends JPanel {
+    -JPanel cards
+    -{static}String LOGIN_PANEL
+    -{static}String SELECTION_PANEL
+    -{static}String CREATE_ACCOUNT_PANEL
+
+    +showPreviousView()
+    +showLoginView()
+    +showCreateAccountView()
+    +showSelectionView()
+    +getSelectionPanel()
+
+}
+
+class CreateAccountView extends JPanel {
+    -boolean usernameFocused
+    -boolean passwordFocused
+    -boolean confirmPasswordFocused
+    -String username
+    -String password
+    -String confirmPassword
+
+    -AuthView parent
+    -AuthController authController
+
+    -renderUi()
+
+}
+
+CreateAccountView -> AuthView
+CreateAccountView -> AuthController
+
+class CreateCanvasView extends JPanel implements View {
+    -HomescreenController homescreenController
+    -boolean canvasNameFocused
+    -boolean isPublic
+
+    +renderUi()
+    +update()
+}
+
+CreateCanvasView -> HomescreenController
+
+class HomescreenView extends JPanel implements View {
+    -ClientModel clientModel
+    -HomescreenController homescreenController
+    -CanvasPanel canvasPanel
+    -PenSelectionView PenSelectionView
+    -ShapeSelectionView shapeSelectionView
+    -SelectCanvasView selectCanvasView
+
+    +render()
+    +update()
+}
+
+HomescreenView -> ClientModel
+HomescreenView -> HomescreenController
+HomescreenView -> CanvasPanel
+HomescreenView -> PenSelectionView
+HomescreenView -> ShapeSelectionView
+HomescreenView -> SelectCanvasView
+
+class LoginView extends JPanel {
+    -boolean usernameFocused
+    -boolean passwordFocused
+    -AuthView parent
+    -AuthController authController
+
+    +renderUi()
+}
+
+LoginView -> AuthView
+LoginView -> AuthController
+
+class PenSelectionView extends JPanel implements View {
+    -HomescreenController homescreenController
+    -ClientModel clientModel
+    -Map<ColorConstants.Colors, JPanel> colorButtons
+
+    +renderUi()
+    +update()
+}
+
+PenSelectionView -> HomescreenController
+PenSelectionView -> ClientModel
+PenSelectionView -> ColorConstants
+
+class SelectCanvasView extends JPanel implements View {
+    -HomescreenController homescreenController
+    -ClientModel clientModel
+    -JPanel canvasList
+
+    +setCanvasList(Map<String, Canvas> canvases) 
+    -getCanvasListItem(Canvas canavs)
+    +update()
+}
+
+SelectCanvasView -> HomescreenController
+SelectCanvasView -> ClientModel
+SelectCanvasView -> Canvas
+
+class ShapeSelectionView extends JPanel implements View {
+    -ClientModel clientModel
+    -Map<ShapeType, JPanel> shapeButtons
+    -HomescreenController homescreenController
+
+    +renderUi()
+    +update()
+}
+
+ShapeSelectionView -> ClientModel
+ShapeSelectionView -> ShapeType
+ShapeSelectionView -> HomescreenController
+
+interface View {
+    +update()
+}
+
+class Utils {
+    +{static} capitalizeFirstLetter(String str)
+}
+
+
+
+
+
+
+
+
+Rectangle -> Coordinate
+Circle -> Coordinate
+Line -> Coordinate
+
+

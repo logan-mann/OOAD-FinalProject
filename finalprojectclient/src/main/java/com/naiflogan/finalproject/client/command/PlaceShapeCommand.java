@@ -23,7 +23,6 @@ public class PlaceShapeCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.println("PLACE SHAPE SHAPE:"  + shape);
         User user = clientModel.getUser();
         AddShapeRequest shapeRequest = new AddShapeRequest(shape, canvasName, user.getJsonWebToken());
         BackendRequestSender.getInstance().addShape(shapeRequest);

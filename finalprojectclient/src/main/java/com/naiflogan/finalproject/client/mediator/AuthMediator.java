@@ -23,11 +23,4 @@ public class AuthMediator {
         authView.showSelectionView();
     }
 
-    public void back() {
-        authView.showPreviousView();
-    }
-
-
-
-    
 }

@@ -10,19 +10,17 @@ import com.naiflogan.finalproject.client.user.User;
 public class UpdateCanvasStateCommand implements Command {
 
     private ClientModel clientModel;
-    private BackendRequestSender backendRequestSender;
 
     public UpdateCanvasStateCommand(ClientModel clientModel) {
         this.clientModel = clientModel;
-        this.backendRequestSender =BackendRequestSender.getInstance();
     }
 
     @Override
     public void execute() {
+        BackendRequestSender backendRequestSender = BackendRequestSender.getInstance();
         User user = clientModel.getUser();
         Map<String, Canvas> newCanvasMap = backendRequestSender.getCanvases(user.getJsonWebToken());
         clientModel.updateCanvasState(newCanvasMap);
-        System.out.println("NUMBER OF SHAPES:" + clientModel.getCurrentCanvas().getShapes().size());
         clientModel.notifyViews();
     }
 

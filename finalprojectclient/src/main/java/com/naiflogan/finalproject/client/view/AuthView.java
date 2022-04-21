@@ -4,7 +4,6 @@ package com.naiflogan.finalproject.client.view;
 import javax.swing.*;
 
 import com.naiflogan.finalproject.client.controller.AuthController;
-import com.naiflogan.finalproject.client.mediator.AuthMediator;
 
 
 import java.awt.*;
@@ -18,14 +17,11 @@ public class AuthView extends JPanel {
     final static String SELECTION_PANEL = "Selection Panel";
     final static String CREATE_ACCOUNT_PANEL = "Create Account Panel";
 
-    private AuthMediator authMediator;
-
     public AuthView(AuthController authController) {
-        authMediator = new AuthMediator(this);
         cards = new JPanel(new CardLayout());
         JPanel selectionPanel = selectionPanel();
-        JPanel loginPanel = new LoginView(authMediator, authController);
-        JPanel createAccountPanel = new CreateAccountView(authMediator, authController);
+        JPanel loginPanel = new LoginView(this, authController);
+        JPanel createAccountPanel = new CreateAccountView(this, authController);
         cards.add(selectionPanel, SELECTION_PANEL);
         cards.add(loginPanel, LOGIN_PANEL);
         cards.add(createAccountPanel, CREATE_ACCOUNT_PANEL);
@@ -65,7 +61,7 @@ public class AuthView extends JPanel {
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                authMediator.showCreateAccountView();
+                showCreateAccountView();
             }
         });
 

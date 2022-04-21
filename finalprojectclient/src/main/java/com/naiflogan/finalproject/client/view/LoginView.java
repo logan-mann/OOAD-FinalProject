@@ -3,7 +3,6 @@ package com.naiflogan.finalproject.client.view;
 import javax.swing.*;
 
 import com.naiflogan.finalproject.client.controller.AuthController;
-import com.naiflogan.finalproject.client.mediator.AuthMediator;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,12 +11,12 @@ public class LoginView extends JPanel {
 
     private boolean usernameFocused;
     private boolean passwordFocused;
-    private AuthMediator authMediator;
+    private AuthView parent;
 
     private AuthController authController;
 
-    public LoginView(AuthMediator mediator, AuthController authController){
-        authMediator = mediator;
+    public LoginView(AuthView parent, AuthController authController){
+        this.parent = parent;
         this.authController = authController;
         renderUi();
     }
@@ -83,7 +82,7 @@ public class LoginView extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                authMediator.showSelectionView();
+                parent.showSelectionView();
             }
         });
 

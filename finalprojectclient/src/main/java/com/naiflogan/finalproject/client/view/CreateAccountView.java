@@ -5,7 +5,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.naiflogan.finalproject.client.controller.AuthController;
-import com.naiflogan.finalproject.client.mediator.AuthMediator;
 
 
 import java.awt.*;
@@ -20,12 +19,12 @@ public class CreateAccountView extends JPanel {
     private String password = "password";
     private String confirmPassword = "confirmPassword";
 
-    private AuthMediator authMediator;
+    private AuthView parent;
 
     private AuthController authController;
 
-    public CreateAccountView(AuthMediator mediator, AuthController authController){
-        authMediator = mediator;
+    public CreateAccountView(AuthView parent, AuthController authController){
+        this.parent = parent;
         this.authController = authController;
         renderUi();
     }
@@ -199,7 +198,7 @@ public class CreateAccountView extends JPanel {
                 backButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        authMediator.showSelectionView();
+                        parent.showSelectionView();
                     }
                 });
         

@@ -33,8 +33,6 @@ public final class App {
      * Says hello to the world.
      * @param args The arguments of the program.
      */
-
-    JPanel cards;
     
     public static void main(String[] args) {
             BackendRequestSender sender = BackendRequestSender.getInstance();

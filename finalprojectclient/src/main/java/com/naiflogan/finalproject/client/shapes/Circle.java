@@ -24,10 +24,6 @@ public class Circle extends Shape {
         return this.center;
     }
 
-    public ShapeType getType() {
-        return ShapeType.CIRCLE;
-    }
-
     public void draw(Graphics g, CanvasPanel canvas) {
         Dimension dim = canvas.getSize();
         double dimX = dim.getWidth();

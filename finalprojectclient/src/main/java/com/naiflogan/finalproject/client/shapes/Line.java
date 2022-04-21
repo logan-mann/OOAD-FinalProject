@@ -42,9 +42,4 @@ public class Line extends Shape {
 
         g.drawLine(startX, startY, endX, endY);
     }
-
-    public ShapeType getType() {
-        return ShapeType.LINE;
-    }
-    
 }
