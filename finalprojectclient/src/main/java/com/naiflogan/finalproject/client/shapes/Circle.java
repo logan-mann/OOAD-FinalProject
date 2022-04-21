@@ -10,9 +10,10 @@ public class Circle extends Shape {
     private int radius;
     private Coordinate center;
 
-    public Circle(@JsonProperty("radius") int radius, @JsonProperty("center")Coordinate center) {
+    public Circle(@JsonProperty("radius") int radius, @JsonProperty("center")Coordinate center, @JsonProperty("hexColor") String hexColor) {
         this.radius = radius;
         this.center = center;
+        this.hexColor = hexColor;
     }
 
     public double getRadius() {

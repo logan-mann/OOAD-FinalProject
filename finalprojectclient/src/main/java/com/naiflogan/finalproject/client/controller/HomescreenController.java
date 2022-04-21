@@ -11,6 +11,10 @@ public class HomescreenController {
     private ClientModel clientModel;
     private CommandInvoker commandInvoker;
 
+    public String getClientModelPenColor() {
+        return clientModel.getCurrentPenColor();
+    }
+
     public HomescreenController(ClientModel clientModel) {
         this.clientModel = clientModel;
         this.commandInvoker = CommandInvoker.getInstance();
@@ -36,6 +40,11 @@ public class HomescreenController {
             commandInvoker.setCommand(updateCommand);
             commandInvoker.executeCommand();
         }
+    }
+
+    public void setCurrentPenColor(String penColor) {
+        this.clientModel.setCurrentPenColor(penColor);
+        this.clientModel.notifyViews();
     }
 
 

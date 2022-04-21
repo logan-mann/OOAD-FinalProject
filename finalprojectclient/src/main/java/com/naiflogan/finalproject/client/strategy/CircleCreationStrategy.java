@@ -23,7 +23,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
     }
 
     @Override
-    public JPanel getShapePropertiesMenu(CanvasPanel canvasPanel) {
+    public JPanel getShapePropertiesMenu(CanvasPanel canvasPanel, HomescreenController homescreenController) {
 
         JLabel radiusDisplay = new JLabel("Radius: " + radius);
 
@@ -39,7 +39,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
             public void actionPerformed(ActionEvent e) {
                 if (radius > 5) {
                     radius-=5;
-                    Circle newCircle = new Circle(radius, lastMouseLocation);
+                    Circle newCircle = new Circle(radius, lastMouseLocation, homescreenController.getClientModelPenColor());
                     canvasPanel.setHover(newCircle);
                     radiusDisplay.setText(getRadiusLabelText());
                     radiusDisplay.revalidate();
@@ -53,7 +53,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
             @Override
             public void actionPerformed(ActionEvent e) {
                 radius+= 5;
-                Circle newCircle = new Circle(radius, lastMouseLocation);
+                Circle newCircle = new Circle(radius, lastMouseLocation, homescreenController.getClientModelPenColor());
                 canvasPanel.setHover(newCircle);
                 radiusDisplay.setText(getRadiusLabelText());
                 radiusDisplay.revalidate();
@@ -80,7 +80,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 Coordinate center = new Coordinate(arg0.getX(), arg0.getY());
-                Circle newCircle = new Circle(radius, center);
+                Circle newCircle = new Circle(radius, center, homescreenController.getClientModelPenColor());
                 homescreenController.placeShape(newCircle);                
             }
 
@@ -117,7 +117,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
             @Override
             public void mouseMoved(MouseEvent arg0) {
                 Coordinate center = new Coordinate(arg0.getX(), arg0.getY());
-                Circle newHoverCircle = new Circle(radius, center);
+                Circle newHoverCircle = new Circle(radius, center, homescreenController.getClientModelPenColor());
                 canvasPanel.setHover(newHoverCircle);
             }
             

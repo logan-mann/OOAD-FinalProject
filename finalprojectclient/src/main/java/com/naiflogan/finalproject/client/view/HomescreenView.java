@@ -14,12 +14,14 @@ public class HomescreenView extends JPanel implements View {
     private ClientModel clientModel;
     private HomescreenController homescreenController;
     private CanvasPanel canvasPanel;
+    private PenSelectionView penSelectionView;
 
 
     public HomescreenView(ClientModel clientModel, HomescreenController homescreenController) {
         this.clientModel = clientModel;
         clientModel.attach(this);
         this.homescreenController = homescreenController;
+        this.penSelectionView = new PenSelectionView(homescreenController, clientModel);
         render();
     }
 
@@ -31,31 +33,37 @@ public class HomescreenView extends JPanel implements View {
         if (clientModel.getUser() != null) {
             holder.add(new JLabel("Welcome, " + clientModel.getUser().getUsername() + "!"));
         }
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
 
         if (clientModel.getCurrentCanvas() != null) {
             JPanel canvasHolder = new JPanel();
             if (canvasPanel == null) {
-                canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes());
+                canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes(), clientModel);
                 MouseInputListener listener = clientModel.getShapeCreationStrategy().getShapeCreationListener(canvasPanel, homescreenController);
                 canvasPanel.addMouseListener(listener);
                 canvasPanel.addMouseMotionListener(listener);
+                clientModel.attach(canvasPanel);
             } else {
                 canvasPanel.setShapes(clientModel.getCurrentCanvas().getShapes());
             }
             canvasHolder.add(canvasPanel);
-            bottomPanel.add(clientModel.getShapeCreationStrategy().getShapePropertiesMenu(canvasPanel));
-            bottomPanel.add(canvasHolder);
-            SelectCanvasView selectCanvasView = new SelectCanvasView(clientModel.getCanvases(), homescreenController);
+            centerPanel.add(clientModel.getShapeCreationStrategy().getShapePropertiesMenu(canvasPanel, homescreenController));
+            centerPanel.add(canvasHolder);
+            SelectCanvasView selectCanvasView = new SelectCanvasView(clientModel.getCanvases(), homescreenController, clientModel);
             selectCanvasView.setAutoscrolls(true);
             JScrollPane scrollPane = new JScrollPane(selectCanvasView);
             scrollPane.setPreferredSize(new Dimension(200,500));
             scrollPane.getVerticalScrollBar().setUnitIncrement(8);
             JPanel scrollHolder = new JPanel();
             scrollHolder.add(scrollPane);
-            bottomPanel.add(scrollHolder);
+            centerPanel.add(scrollHolder);
+
         }
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        bottomPanel.add(this.penSelectionView);
+        holder.add(centerPanel);
         holder.add(bottomPanel);
         this.add(holder);
     }

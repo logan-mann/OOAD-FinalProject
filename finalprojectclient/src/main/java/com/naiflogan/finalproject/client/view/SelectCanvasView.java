@@ -11,15 +11,18 @@ import javax.swing.event.MouseInputListener;
 import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
+import com.naiflogan.finalproject.client.model.ClientModel;
 
 public class SelectCanvasView extends JPanel implements View {
 
     private Map<String, Canvas> canvases;
     private HomescreenController homescreenController;
+    private ClientModel clientModel;
 
-    public SelectCanvasView(Map<String,Canvas> canvases, HomescreenController homescreenController) {
+    public SelectCanvasView(Map<String,Canvas> canvases, HomescreenController homescreenController, ClientModel clientModel) {
         this.canvases = canvases;
         this.homescreenController = homescreenController;
+        this.clientModel = clientModel;
         renderUi();
     }
 
@@ -47,7 +50,7 @@ public class SelectCanvasView extends JPanel implements View {
         JPanel canvasListItem = new JPanel();
         canvasListItem.setLayout(new BoxLayout(canvasListItem, BoxLayout.Y_AXIS));
         canvasListItem.add(new JLabel(canvas.getName()));
-        CanvasPanel canvasPreviewPanel = new CanvasPanel(canvas.getShapes());
+        CanvasPanel canvasPreviewPanel = new CanvasPanel(canvas.getShapes(), clientModel);
         JPanel holder = new JPanel();
         canvasPreviewPanel.setPreferredSize(new Dimension(100,100));
         holder.add(canvasPreviewPanel);

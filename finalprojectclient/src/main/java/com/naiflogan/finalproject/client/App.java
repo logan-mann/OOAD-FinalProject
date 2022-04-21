@@ -9,10 +9,12 @@ import com.naiflogan.finalproject.client.request.LoginRequest;
 import com.naiflogan.finalproject.client.requestsender.AuthRequestSender;
 import com.naiflogan.finalproject.client.requestsender.BackendRequestSender;
 import com.naiflogan.finalproject.client.shapes.Circle;
+import com.naiflogan.finalproject.client.shapes.ColorConstants;
 import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Line;
 import com.naiflogan.finalproject.client.user.User;
 import com.naiflogan.finalproject.client.view.AppView;
+
 import com.naiflogan.finalproject.client.controller.AuthController;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
@@ -35,7 +37,6 @@ public final class App {
     JPanel cards;
     
     public static void main(String[] args) {
-        try {
             BackendRequestSender sender = BackendRequestSender.getInstance();
             AuthRequestSender authSender = AuthRequestSender.getInstance();
             CreateAccountRequest createAcc = new CreateAccountRequest("loganmann", "testPass579");
@@ -45,9 +46,9 @@ public final class App {
             
             Coordinate start = new Coordinate(100, 100);
             Coordinate end = new Coordinate(300,300);
-            Line newLine = new Line(start, end);
-            Circle newCircle = new Circle(50, new Coordinate(100,100));
-            Circle secondCircle = new Circle(150, new Coordinate(200, 250));
+            Line newLine = new Line(start, end, ColorConstants.PURPLE);
+            Circle newCircle = new Circle(50, new Coordinate(100,100), ColorConstants.BLUE);
+            Circle secondCircle = new Circle(150, new Coordinate(200, 250), ColorConstants.RED);
             AddCanvasRequest request0 = new AddCanvasRequest("testCanvas", user.getJsonWebToken(), true);
             AddCanvasRequest request3 = new AddCanvasRequest("testCanvas2", user.getJsonWebToken(), true);
             AddShapeRequest request1 = new AddShapeRequest(newLine, "testCanvas", user.getJsonWebToken());
@@ -59,9 +60,6 @@ public final class App {
             sender.addShape(request4);
             sender.addShape(request1);
             sender.addShape(request2);
-        } catch (Exception e) {
-
-        }
 
         //AppView appView = new AppView();
         //appView.createAndShowGui();
@@ -75,5 +73,15 @@ public final class App {
         frame.setSize(900,800);
         frame.setContentPane(appView);
         frame.setVisible(true);
+
+        while (true) {
+            try {
+                Thread.sleep(2000);
+
+            } catch (Exception e) {
+
+            }
+            homescreenController.updateCanvasState();
+        }
     }
 }

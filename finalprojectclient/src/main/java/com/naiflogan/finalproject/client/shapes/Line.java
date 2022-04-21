@@ -11,9 +11,11 @@ public class Line extends Shape {
     private Coordinate end;
 
     public Line(@JsonProperty("start") Coordinate start, 
-                @JsonProperty("end")Coordinate end) {
+                @JsonProperty("end")Coordinate end,
+                @JsonProperty("hexColor") String hexColor) {
         this.start = start;
         this.end = end;
+        this.hexColor = hexColor;
     }
 
     public Coordinate getStart() {

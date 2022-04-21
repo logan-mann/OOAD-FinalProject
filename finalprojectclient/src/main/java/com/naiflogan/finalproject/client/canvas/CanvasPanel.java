@@ -2,16 +2,19 @@ package com.naiflogan.finalproject.client.canvas;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.MouseInputListener;
 
+import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.Circle;
 import com.naiflogan.finalproject.client.shapes.Coordinate;
 import com.naiflogan.finalproject.client.shapes.Shape;
+import com.naiflogan.finalproject.client.view.View;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CanvasPanel extends JPanel {
+public class CanvasPanel extends JPanel implements View {
 
     private List<Shape> shapes;
 
@@ -19,28 +22,34 @@ public class CanvasPanel extends JPanel {
     private Shape hover;
     public final static int DEFAULT_SIZE = 500;
     private Dimension preferredSize = new Dimension(DEFAULT_SIZE,DEFAULT_SIZE);
+    private ClientModel clientModel;
+
+    private MouseInputListener mouseListener;
 
 
 
-    public CanvasPanel() {
+    public CanvasPanel(ClientModel clientModel) {
         this.setBackground(Color.WHITE);
         this.shapes = new ArrayList<>();
-        this.hover = new Circle(radius, new Coordinate(0, 0));
+        this.hover = new Circle(radius, new Coordinate(0, 0), "0x000000");
         //this.addMouseMotionListener(this);
         this.setBorder(new LineBorder(Color.BLACK));
+        this.clientModel = clientModel;
+        //this.clientModel.attach(this);
     }
 
     public Dimension getPreferredSize() {
         return preferredSize;
     }
 
-    public CanvasPanel(List<Shape> shapes) {
+    public CanvasPanel(List<Shape> shapes, ClientModel clientModel) {
         this.setBackground(Color.WHITE);
-        this.hover = new Circle(radius, new Coordinate(0, 0));
+        this.hover = new Circle(radius, new Coordinate(0, 0), "0x000000");
         this.shapes = shapes;
         //this.addMouseMotionListener(this);
         this.setBorder(new LineBorder(Color.BLACK));
-
+        this.clientModel = clientModel;
+        //this.clientModel.attach(this);
     }
 
     public void setPreferredSize(Dimension dim) {
@@ -53,16 +62,21 @@ public class CanvasPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        g.setColor(Color.RED);
         super.paintComponent(g);
-
         for (Shape shape : this.shapes) {
+            g.setColor(Color.decode(shape.getHexColor()));
             shape.draw(g, this);
         }
-
+        g.setColor(Color.decode(clientModel.getCurrentPenColor()));
         this.hover.draw(g, this);
 
 
+    }
+
+    public void setMouseListener(MouseInputListener newListener) {
+        if (this.mouseListener != null) {
+
+        }
     }
 
     public void setHover(Shape hover) {
@@ -75,6 +89,12 @@ public class CanvasPanel extends JPanel {
         this.shapes = shapes;
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void update() {
+        this.revalidate();
+        this.repaint();
     }
     
 }

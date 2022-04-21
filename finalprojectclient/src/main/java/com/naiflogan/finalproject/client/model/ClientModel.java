@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.naiflogan.finalproject.client.canvas.Canvas;
+import com.naiflogan.finalproject.client.shapes.ColorConstants;
 import com.naiflogan.finalproject.client.shapes.ShapeType;
 import com.naiflogan.finalproject.client.strategy.CircleCreationStrategy;
 import com.naiflogan.finalproject.client.strategy.ShapeCreationStrategy;
@@ -24,6 +25,9 @@ public class ClientModel implements Model {
 
     private ShapeType currentShapeType;
     private ShapeCreationStrategy shapeCreationStrategy;
+
+    //Must be hex string
+    private String currentPenColor;
 
     public List<View> getAttachedViews() {
         return this.attachedViews;
@@ -52,6 +56,15 @@ public class ClientModel implements Model {
         this.attachedViews = new ArrayList<>();
         this.currentShapeType = ShapeType.Circle;
         this.shapeCreationStrategy = new CircleCreationStrategy();
+        this.currentPenColor = ColorConstants.RED;
+    }
+
+    public void setCurrentPenColor(String hexColor) {
+        this.currentPenColor = hexColor;
+    }
+    
+    public String getCurrentPenColor() {
+        return this.currentPenColor;
     }
 
     public   Map<String, Canvas> getCanvases() {
@@ -123,7 +136,7 @@ public class ClientModel implements Model {
         for (View view : views) {
             view.update();
         }
-        System.out.println(views.size());
+        System.out.println("ClientModel observers: " + views.size());
     }
 
     

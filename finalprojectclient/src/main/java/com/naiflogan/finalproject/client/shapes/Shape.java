@@ -14,11 +14,13 @@ import java.awt.*;
 })
 public abstract class Shape {
 
-
-    public Shape() {
-    }
+    protected String hexColor;
 
     public abstract void draw(Graphics g, CanvasPanel canvas);
 
     public abstract ShapeType getType(); 
+
+    public String getHexColor() {
+        return hexColor;
+    }
 }

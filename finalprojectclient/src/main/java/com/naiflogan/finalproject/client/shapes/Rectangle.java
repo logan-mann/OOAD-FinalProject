@@ -10,10 +10,12 @@ public class Rectangle extends Shape {
     private int height;
     private int length;
 
-    public Rectangle(@JsonProperty("center")Coordinate center,@JsonProperty("length")int length,@JsonProperty("height")int height) {
+    public Rectangle(@JsonProperty("center")Coordinate center,@JsonProperty("length")int length,@JsonProperty("height")int height,
+    @JsonProperty("hexColor") String hexColor) {
         this.center = center;
         this.height = height;
         this.length = length;
+        this.hexColor = hexColor;
     }
 
     public void draw(Graphics g, CanvasPanel canvas) {
