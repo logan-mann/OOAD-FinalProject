@@ -8,7 +8,6 @@ import java.util.Map;
 import com.naiflogan.finalproject.client.canvas.Canvas;
 import com.naiflogan.finalproject.client.shapes.ColorConstants;
 import com.naiflogan.finalproject.client.shapes.ShapeType;
-import com.naiflogan.finalproject.client.strategy.CircleCreationStrategy;
 import com.naiflogan.finalproject.client.strategy.LineCreationStrategy;
 import com.naiflogan.finalproject.client.strategy.ShapeCreationStrategy;
 import com.naiflogan.finalproject.client.user.User;
