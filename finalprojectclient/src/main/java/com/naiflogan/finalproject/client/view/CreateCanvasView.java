@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.awt.*;
 
 import com.naiflogan.finalproject.client.controller.HomescreenController;
-import com.naiflogan.finalproject.client.model.ClientModel;
 
 public class CreateCanvasView extends JPanel implements View {
 
