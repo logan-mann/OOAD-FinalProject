@@ -54,7 +54,7 @@ public class ClientModel implements Model {
         this.currentCanvas = null;
         this.canvases = new HashMap<>();
         this.attachedViews = new ArrayList<>();
-        this.currentShapeType = ShapeType.Circle;
+        this.currentShapeType = ShapeType.CIRCLE;
         this.shapeCreationStrategy = new CircleCreationStrategy();
         this.currentPenColor = ColorConstants.RED;
     }

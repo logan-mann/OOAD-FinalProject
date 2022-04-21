@@ -75,8 +75,12 @@ public class CanvasPanel extends JPanel implements View {
 
     public void setMouseListener(MouseInputListener newListener) {
         if (this.mouseListener != null) {
-
+            this.removeMouseListener(this.mouseListener);
+            this.removeMouseMotionListener(this.mouseListener);
         }
+        this.mouseListener = newListener;
+        this.addMouseListener(newListener);
+        this.addMouseMotionListener(newListener);
     }
 
     public void setHover(Shape hover) {

@@ -44,7 +44,7 @@ public class Line extends Shape {
     }
 
     public ShapeType getType() {
-        return ShapeType.Line;
+        return ShapeType.LINE;
     }
     
 }

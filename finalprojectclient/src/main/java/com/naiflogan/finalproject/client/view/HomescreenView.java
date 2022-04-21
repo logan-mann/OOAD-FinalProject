@@ -41,8 +41,7 @@ public class HomescreenView extends JPanel implements View {
             if (canvasPanel == null) {
                 canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes(), clientModel);
                 MouseInputListener listener = clientModel.getShapeCreationStrategy().getShapeCreationListener(canvasPanel, homescreenController);
-                canvasPanel.addMouseListener(listener);
-                canvasPanel.addMouseMotionListener(listener);
+                canvasPanel.setMouseListener(listener);
                 clientModel.attach(canvasPanel);
             } else {
                 canvasPanel.setShapes(clientModel.getCurrentCanvas().getShapes());

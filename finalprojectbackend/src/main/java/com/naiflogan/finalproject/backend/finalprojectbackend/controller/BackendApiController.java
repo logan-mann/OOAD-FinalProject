@@ -44,6 +44,10 @@ public class BackendApiController implements Subject {
 
         final String canvasName = addShapeRequest.getCanvasName();
         final Shape shape = addShapeRequest.getShape();
+        System.out.println(shape);
+        System.out.println(addShapeRequest.getJwt());
+        System.out.println(addShapeRequest.getCanvasName());
+
         final String jwt = addShapeRequest.getJwt();
 
         if (!jwtUtils.validateJwtToken(jwt)) {

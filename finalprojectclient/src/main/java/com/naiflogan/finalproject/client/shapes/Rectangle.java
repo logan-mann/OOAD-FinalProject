@@ -6,11 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 
 public class Rectangle extends Shape {
-    private Coordinate center;
-    private int height;
     private int length;
+    private int height;
+    private Coordinate center;
 
-    public Rectangle(@JsonProperty("center")Coordinate center,@JsonProperty("length")int length,@JsonProperty("height")int height,
+
+    public Rectangle(@JsonProperty("length")int length, @JsonProperty("height") int height, @JsonProperty("center")Coordinate center,
     @JsonProperty("hexColor") String hexColor) {
         this.center = center;
         this.height = height;
@@ -18,12 +19,37 @@ public class Rectangle extends Shape {
         this.hexColor = hexColor;
     }
 
+
+    public int getLength() {
+        return this.length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Coordinate getCenter() {
+        return this.center;
+    }
+
+    public void setCenter(Coordinate center) {
+        this.center = center;
+    }
+
+
     public void draw(Graphics g, CanvasPanel canvas) {
+
         Dimension dim = canvas.getSize();
-        System.out.println(dim.getWidth() + " " + dim.getHeight());
         int dimX = (int) dim.getWidth();
         int dimY = (int) dim.getHeight();
-
         int centerX = (dimX/CanvasPanel.DEFAULT_SIZE) * center.x;
         int centerY = (dimY/CanvasPanel.DEFAULT_SIZE) * center.y;
 
@@ -38,7 +64,11 @@ public class Rectangle extends Shape {
     }
 
     public ShapeType getType() {
-        return ShapeType.Rectangle;
+        return ShapeType.RECTANGLE;
+    }
+
+    public String toString() {
+        return "Center: " + center + " Length: "+ length + "Height: " + height + " Color: " + hexColor;
     }
     
 }

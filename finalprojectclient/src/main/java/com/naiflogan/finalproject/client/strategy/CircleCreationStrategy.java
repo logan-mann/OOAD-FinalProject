@@ -2,7 +2,7 @@ package com.naiflogan.finalproject.client.strategy;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.event.MouseInputListener;
+import javax.swing.event.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -75,43 +75,13 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
 
     @Override
     public MouseInputListener getShapeCreationListener(CanvasPanel canvasPanel, HomescreenController homescreenController) {
-        MouseInputListener listener = new MouseInputListener() {
+        MouseInputListener listener = new MouseInputAdapter() {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 Coordinate center = new Coordinate(arg0.getX(), arg0.getY());
                 Circle newCircle = new Circle(radius, center, homescreenController.getClientModelPenColor());
                 homescreenController.placeShape(newCircle);                
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void mouseExited(MouseEvent arg0) {
-                lastMouseLocation = new Coordinate(arg0.getX(), arg0.getY());
-                
-            }
-
-            @Override
-            public void mousePressed(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent arg0) {
-                // TODO Auto-generated method stub
-                
             }
 
             @Override

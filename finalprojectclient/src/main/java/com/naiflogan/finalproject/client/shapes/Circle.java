@@ -25,7 +25,7 @@ public class Circle extends Shape {
     }
 
     public ShapeType getType() {
-        return ShapeType.Circle;
+        return ShapeType.CIRCLE;
     }
 
     public void draw(Graphics g, CanvasPanel canvas) {

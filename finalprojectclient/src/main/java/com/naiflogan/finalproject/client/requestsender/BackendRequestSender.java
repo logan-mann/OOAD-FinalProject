@@ -31,7 +31,7 @@ public class BackendRequestSender {
         String url = Constants.backendApiUrl + "/add_shape";
         String res = this.restTemplate.postForObject(url, shapeRequest, String.class);
 
-        System.out.println("ADDING SHAPEOAJSDFOAJSDFOASJDFPOAJDFPAOJSDAOPSJDFJASDFAJDFA");
+        System.out.println("ADDING SHAPE: " + shapeRequest.getShape());
 
         System.out.println(res);
     }
