@@ -16,6 +16,14 @@ public class AddCanvasRequest {
         return this.canvasName;
     }
 
+    public void setIsPublic(boolean isPublic) {
+        this.isPublic = isPublic;
+    }
+
+    public boolean getIsPublic() {
+        return isPublic;
+    }
+
     public String getJwt() {
         return this.jwt;
     }

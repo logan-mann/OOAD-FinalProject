@@ -20,6 +20,7 @@ public class CreateCanvasCommand implements Command {
     @Override
     public void execute() {
         User user = clientModel.getUser();
+        System.out.println(isPublic);
         AddCanvasRequest addCanvasRequest = new AddCanvasRequest(canvasName, user.getJsonWebToken(), isPublic);
         BackendRequestSender.getInstance().addCanvas(addCanvasRequest);
     }

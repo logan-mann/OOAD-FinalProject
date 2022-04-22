@@ -127,7 +127,22 @@ public class ClientModel implements Model {
 
     public void updateCanvasState(Map<String, Canvas> newCanvasMap) {
         this.canvases = newCanvasMap;
-        this.currentCanvas = newCanvasMap.get(currentCanvas.getName());
+        System.out.println("IN CLINET MODEL UPDATE");
+        if (currentCanvas != null) {
+            System.out.println("IN CLINET MODEL UPDATE1");
+
+            this.currentCanvas = newCanvasMap.getOrDefault(currentCanvas.getName(), null);
+        } else {
+            if (this.canvases.values().size() > 0) {
+                System.out.println("IN CLINET MODEL UPDATE2");
+
+                this.currentCanvas = this.canvases.values().iterator().next();
+            } else {
+                System.out.println("IN CLINET MODEL UPDATE3");
+
+                this.currentCanvas = null;
+            }
+        }
     }
 
 

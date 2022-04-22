@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
@@ -42,6 +43,14 @@ public class HomescreenView extends JPanel implements View {
         if (clientModel.getUser() != null) {
             JPanel topPanel = new JPanel();
             topPanel.add(new JLabel("Welcome to CloudCanvas, " + clientModel.getUser().getUsername() + "!"), Component.CENTER_ALIGNMENT);
+            JButton logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    homescreenController.logout();
+                }
+            });
+            topPanel.add(logoutButton, Component.RIGHT_ALIGNMENT);
             holder.add(topPanel);
         }
 
@@ -50,25 +59,31 @@ public class HomescreenView extends JPanel implements View {
         //Horizontal Layout
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
 
-        //If the current canvas is not null, we need to add main canvas
-        if (clientModel.getCurrentCanvas() != null) {
             //Create holder for the main CanvasPanel
             JPanel canvasHolder = new JPanel();
+            //If the current canvas is not null, we need to add main canvas
 
-            //Either initialize canvas panel or update its shapes
-            if (this.canvasPanel == null) {
-                this.canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes(), clientModel);
-                this.clientModel.attach(canvasPanel);
+            if (clientModel.getCurrentCanvas() != null) {
+                //Either initialize canvas panel or update its shapes
+                if (this.canvasPanel == null) {
+                    this.canvasPanel = new CanvasPanel(clientModel.getCurrentCanvas().getShapes(), clientModel);
+                    this.clientModel.attach(canvasPanel);
+                } else {
+                    //Set the canvasPanel's shapes to the current shapes
+                    canvasPanel.setShapes(clientModel.getCurrentCanvas().getShapes());
+                }
+                canvasHolder.add(canvasPanel);
+                //add to canvasHolder
+
+                //Set current mouse listener for canvasPanel pertaining to current shape creation strategy
+                MouseInputListener listener = clientModel.getShapeCreationStrategy().getShapeCreationListener(canvasPanel, homescreenController);
+                canvasPanel.setMouseListener(listener);
             } else {
-                //Set the canvasPanel's shapes to the current shapes
-                canvasPanel.setShapes(clientModel.getCurrentCanvas().getShapes());
+                JPanel placeholder = new JPanel();
+                placeholder.setPreferredSize(new Dimension(500,500));
+                placeholder.add(new JLabel("Please select or create a canvas."), Component.CENTER_ALIGNMENT);
+                canvasHolder.add(placeholder);
             }
-            //add to canvasHolder
-            canvasHolder.add(canvasPanel);
-
-            //Set current mouse listener for canvasPanel pertaining to current shape creation strategy
-            MouseInputListener listener = clientModel.getShapeCreationStrategy().getShapeCreationListener(canvasPanel, homescreenController);
-            canvasPanel.setMouseListener(listener);
             
             //Shape Properties Menu
             JPanel shapePropertiesHolder = new JPanel();
@@ -81,7 +96,6 @@ public class HomescreenView extends JPanel implements View {
             centerPanel.add(shapePropertiesHolder);
             centerPanel.add(canvasHolder);
             centerPanel.add(selectCanvasView);
-        }
 
         //Set canvas list for Select Canvas View
         selectCanvasView.setCanvasList(clientModel.getCanvases());

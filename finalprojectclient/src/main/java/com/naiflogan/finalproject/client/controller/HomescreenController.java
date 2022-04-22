@@ -73,4 +73,10 @@ public class HomescreenController {
         updateCanvasState();
         goToHomescreenView();
     }
+
+    public void logout() {
+        this.clientModel.setUser(null);
+        this.clientModel.setLoggedIn(false);
+        this.clientModel.notifyViews();
+    }
 }
