@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+
+/**
+ * Example code from: https://www.bezkoder.com/spring-boot-jwt-authentication/ cited for creating/verifying JWTs in Java/Spring-Boot
+ */
 @Component
 public class JwtUtils {
 
