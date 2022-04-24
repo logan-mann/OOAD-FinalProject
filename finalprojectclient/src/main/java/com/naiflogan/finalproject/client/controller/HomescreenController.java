@@ -25,7 +25,6 @@ public class HomescreenController {
 
     public void placeShape(Shape shape) {
         String canvasName = clientModel.getCurrentCanvas().getName();
-        System.out.println("PLACE SHAPE COMMAND SHAPE:" + shape);
         PlaceShapeCommand shapeCommand = new PlaceShapeCommand(shape, canvasName, clientModel);
         commandInvoker.setCommand(shapeCommand);
         commandInvoker.executeCommand();

@@ -38,7 +38,6 @@ public class AuthRequestSender {
         try {
             LoginResponse res = this.restTemplate.postForObject(url, loginRequest, LoginResponse.class);
             if (res.getError() == null) {
-                System.out.println("Token: " + res.getUser().getJsonWebToken());
                 return res.getUser();
             }
         } catch (Exception e) {

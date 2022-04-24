@@ -30,9 +30,6 @@ public class BackendRequestSender {
     public void addShape(AddShapeRequest shapeRequest) {
         String url = Constants.backendApiUrl + "/add_shape";
         String res = this.restTemplate.postForObject(url, shapeRequest, String.class);
-
-        System.out.println("ADDING SHAPE: " + shapeRequest.getShape());
-
         System.out.println(res);
     }
 
@@ -48,8 +45,6 @@ public class BackendRequestSender {
         String url = Constants.backendApiUrl + "/get_canvases";
         ParameterizedTypeReference<Map<String, Canvas>> responseType = 
         new ParameterizedTypeReference<Map<String, Canvas>>() {};
-
-        System.out.println("GETTING CANVASSES ODJFAOSDJFOASJDFPASFJAPOSJFA");
 
         
         RequestEntity<String> request = RequestEntity.post(url).accept(MediaType.APPLICATION_JSON).body(jwt);
