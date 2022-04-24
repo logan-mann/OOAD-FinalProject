@@ -1,6 +1,7 @@
 package com.naiflogan.finalproject.client.view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.*;
@@ -73,7 +74,9 @@ public class PenSelectionView extends JPanel implements View {
 
             //Set the selected color to look like it is pressed, others to look like not pressed
             if (colorHexVal.equals(clientModel.getCurrentPenColor())) {
-                colorButton.setBorder(BorderFactory.createLoweredBevelBorder());
+                Border titled = BorderFactory.createTitledBorder("Selected");
+                Border lowered = BorderFactory.createLoweredBevelBorder();
+                colorButton.setBorder(BorderFactory.createCompoundBorder(lowered,titled));
             } else {
                 colorButton.setBorder(BorderFactory.createRaisedBevelBorder());
 

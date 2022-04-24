@@ -25,10 +25,10 @@ public class LineCreationStrategy implements ShapeCreationStrategy {
         JPanel linePanel = new JPanel();
         linePanel.setLayout(new BoxLayout(linePanel, BoxLayout.Y_AXIS));
             
-        JTextArea instructions = new JTextArea("Line Placement Instructions:\n\n" + 
-        "Click to place line starting point at the mouse cursor.\n\n" +
-        "Click again place line end point at the mouse cursor and place the line on the canvas.\n\n"+
-        "Move the cursor off of the canvas to reset the line.\n");
+        JTextArea instructions = new JTextArea("Line Placement Instructions:\n" + 
+        "Click to place line starting \npoint at the mouse cursor.\n\n" +
+        "Click again place line end \npoint at the mouse cursor \nand place the line \non the canvas.\n\n"+
+        "Move the cursor off of the \ncanvas to reset the line.\n");
         instructions.setEditable(false);
         instructions.setLineWrap(true);
         instructions.setOpaque(false);

@@ -33,8 +33,8 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
         propertiesMenu.setLayout(new BoxLayout(propertiesMenu, BoxLayout.Y_AXIS));
         JPanel radiusPanel = new JPanel();
         radiusPanel.setLayout(new BoxLayout(radiusPanel, BoxLayout.Y_AXIS));
-        JButton decreaseRadiusButton = new JButton("Decrement Radius");
-        JButton increaseRadiusButton = new JButton("Increment Radius");
+        JButton decreaseRadiusButton = new JButton("-");
+        JButton increaseRadiusButton = new JButton("+");
         decreaseRadiusButton.addActionListener(new ActionListener() {
 
             @Override
@@ -64,6 +64,7 @@ public class CircleCreationStrategy implements ShapeCreationStrategy {
             
         });
         propertiesMenu.add(new JLabel("Current Shape Type: Circle"), Component.TOP_ALIGNMENT);
+        propertiesMenu.add(Box.createVerticalStrut(25));
         radiusPanel.add(increaseRadiusButton);
         radiusPanel.add(radiusDisplay);
         radiusPanel.add(decreaseRadiusButton);

@@ -35,8 +35,8 @@ public class RectangleCreationStrategy implements ShapeCreationStrategy {
         JLabel lengthDisplay = new JLabel("Length: " + length);
         JPanel lengthPanel = new JPanel();
         lengthPanel.setLayout(new BoxLayout(lengthPanel, BoxLayout.Y_AXIS));
-        JButton decreaseLengthButton = new JButton("Decrement Length");
-        JButton increaseLengthButton = new JButton("Increment Length");
+        JButton decreaseLengthButton = new JButton("-");
+        JButton increaseLengthButton = new JButton("+");
         decreaseLengthButton.addActionListener(new ActionListener() {
 
             @Override
@@ -75,8 +75,8 @@ public class RectangleCreationStrategy implements ShapeCreationStrategy {
         JLabel heightDisplay = new JLabel("Height: " + height);
         JPanel heightPanel = new JPanel();
         heightPanel.setLayout(new BoxLayout(heightPanel, BoxLayout.Y_AXIS));
-        JButton decreaseHeightButton = new JButton("Decrement Height");
-        JButton increaseHeightButton = new JButton("Increment Height");
+        JButton decreaseHeightButton = new JButton("-");
+        JButton increaseHeightButton = new JButton("+");
         decreaseHeightButton.addActionListener(new ActionListener() {
 
             @Override
@@ -105,11 +105,12 @@ public class RectangleCreationStrategy implements ShapeCreationStrategy {
             }
             
         });
+        propertiesMenu.add(Box.createVerticalStrut(25));
         heightPanel.add(increaseHeightButton);
         heightPanel.add(heightDisplay);
         heightPanel.add(decreaseHeightButton);
-
         propertiesMenu.add(lengthPanel);
+        propertiesMenu.add(Box.createVerticalStrut(25));
         propertiesMenu.add(heightPanel);
         return propertiesMenu;
     }

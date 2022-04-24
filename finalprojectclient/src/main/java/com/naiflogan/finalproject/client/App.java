@@ -35,6 +35,8 @@ public final class App {
      */
     
     public static void main(String[] args) {
+
+        /*
             BackendRequestSender sender = BackendRequestSender.getInstance();
             AuthRequestSender authSender = AuthRequestSender.getInstance();
             CreateAccountRequest createAcc = new CreateAccountRequest("loganmann", "testPass579");
@@ -61,6 +63,8 @@ public final class App {
 
         //AppView appView = new AppView();
         //appView.createAndShowGui();
+
+        */
 
         JFrame frame = new JFrame("CloudCanvas");
         ClientModel clientModel = new ClientModel();
