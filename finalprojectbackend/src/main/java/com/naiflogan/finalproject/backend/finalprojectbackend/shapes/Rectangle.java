@@ -2,6 +2,9 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.shapes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Extends abstract Shape class, is concrete class for "Rectangle" shape type
+ */
 public class Rectangle extends Shape {
 
     @JsonProperty("length")

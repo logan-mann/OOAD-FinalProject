@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Driver SpringBoot Application, creates Beans for PasswordEncoder and Canvas map
+ */
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class FinalprojectbackendApplication {
 

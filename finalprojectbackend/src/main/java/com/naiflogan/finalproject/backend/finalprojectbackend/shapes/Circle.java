@@ -1,10 +1,14 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.shapes;
 
+/**
+ * Extends abstract Shape class, is concrete class for "Circle" shape type
+ */
 public class Circle extends Shape {
 
     private double radius;
     private Coordinate center;
 
+    
     public Circle(double radius, Coordinate center, String hexColor) {
         this.radius = radius;
         this.center = center;

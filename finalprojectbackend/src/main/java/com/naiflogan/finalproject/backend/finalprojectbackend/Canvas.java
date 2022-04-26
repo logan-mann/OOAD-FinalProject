@@ -5,6 +5,10 @@ import java.util.List;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
 
+/**
+ * Class containing all attributes of a Canvas
+ * Contains a list of shapes, whether it's public, who can access it, and a name
+ */
 public class Canvas {
 
     List<Shape> shapes;

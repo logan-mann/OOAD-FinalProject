@@ -1,5 +1,8 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.request;
 
+/**
+ * Request class containing fields needed for request to /add_canvas in backend service
+ */
 public class AddCanvasRequest {
     private String canvasName;
     private boolean isPublic;

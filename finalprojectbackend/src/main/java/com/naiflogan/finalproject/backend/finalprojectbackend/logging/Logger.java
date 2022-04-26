@@ -15,7 +15,7 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.observer.Observer;
 /*
     Handle logging of backend API activity
     Logs any events observed by the logger, outputs to file w/ date and time of event
-    Utilizes Observer and Singleton Patterns
+    Utilizes OBSERVER and SINGLETON Patterns
 */
 public class Logger implements Observer {
 
@@ -24,10 +24,12 @@ public class Logger implements Observer {
     public void update(Event event) {
         //Only deal with logging events
         if (event.getClass() == LoggingEvent.class) {
+            //Get date and filename
             LocalDate currDate = LocalDate.now();
             String filename = "Logger-Output-" + currDate.toString();
             File file = new File(filename);
             
+            //Create or open file and append message
             try {
                 if (!file.exists()) {
                     file.createNewFile();
@@ -43,6 +45,7 @@ public class Logger implements Observer {
 
     }
 
+    //Get singleton instance
     public static Logger getInstance() {
         return loggerInstance;
     }

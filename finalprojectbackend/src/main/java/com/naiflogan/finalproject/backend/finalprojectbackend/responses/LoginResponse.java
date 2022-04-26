@@ -2,6 +2,9 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.responses;
 
 import com.naiflogan.finalproject.backend.finalprojectbackend.user.User;
 
+/**
+ * Class containing fields in login response from backend service
+ */
 public class LoginResponse {
 
     private User user;

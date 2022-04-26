@@ -1,5 +1,8 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.request;
 
+/**
+ * Request object containing fields needed for request to /create_account in backend service
+ */
 public class CreateAccountRequest {
 
     private String username;

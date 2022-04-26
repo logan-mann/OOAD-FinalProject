@@ -2,6 +2,9 @@ package com.naiflogan.finalproject.backend.finalprojectbackend.database;
 
 import javax.persistence.*;
 
+/**
+ * UserEntity class for representing user database records
+ */
 @Entity
 @Table(name = "users")
 public class UserEntity {

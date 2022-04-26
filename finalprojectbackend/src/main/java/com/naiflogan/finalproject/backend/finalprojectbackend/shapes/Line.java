@@ -1,5 +1,8 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.shapes;
 
+/**
+ * Extends abstract Shape class, is concrete class for "Line" shape type
+ */
 public class Line extends Shape {
 
     private Coordinate start;
