@@ -16,6 +16,8 @@ import com.naiflogan.finalproject.client.model.ClientModel;
 
 /**
  * This view displays a scrollable menu of available canvases and allows the user to select from them
+ * This is part of MVC PATTERN, so implements MVC View class
+ * references state contained in ClientModel
  */
 public class SelectCanvasView extends JPanel implements View {
 

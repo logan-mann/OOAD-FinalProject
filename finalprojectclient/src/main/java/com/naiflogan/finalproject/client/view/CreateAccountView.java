@@ -10,7 +10,13 @@ import com.naiflogan.finalproject.client.controller.AuthController;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class implements the CreateAccountView UI component
+ * This View doesn't depend on a model, it's just a static page so we don't use our MVC View interface
+ */
 public class CreateAccountView extends JPanel {
+
+    //Form state variables
     private boolean usernameFocused = false;
     private boolean passwordFocused = false;
     private boolean confirmPasswordFocused = false;
@@ -19,8 +25,10 @@ public class CreateAccountView extends JPanel {
     private String password = "password";
     private String confirmPassword = "confirmPassword";
 
+    //Parent view
     private AuthView parent;
 
+    //AuthController for sending create account actions
     private AuthController authController;
 
     public CreateAccountView(AuthView parent, AuthController authController){
@@ -29,6 +37,7 @@ public class CreateAccountView extends JPanel {
         renderUi();
     }
 
+    //Helper function to render UI
     private void renderUi() {
                 //Create panel to house everything and set layout to vertical layout (stack elements)
                 JPanel centerPanel = new JPanel();

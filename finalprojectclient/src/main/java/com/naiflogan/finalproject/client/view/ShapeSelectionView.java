@@ -18,10 +18,18 @@ import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.ShapeType;
 
+/**
+ * This class implements a UI component which displays the possible shape types, buttons for user to click to choose shape type they wish to place
+ * Part of MVC PATTERN, implements our MVC View interface
+ * References state contained in ClientModel
+ */
 public class ShapeSelectionView extends JPanel implements View {
 
+    //Model object this component references
     private ClientModel clientModel;
+    //Map of buttons for shape selection, maps shape type to button object
     private Map<ShapeType, JPanel> shapeButtons;
+    //Homescreen controller for modifying model state
     private HomescreenController homescreenController;
     
     public ShapeSelectionView(ClientModel clientModel, HomescreenController homescreenController) {
@@ -32,26 +40,40 @@ public class ShapeSelectionView extends JPanel implements View {
         renderUi();
     }
 
-    public void renderUi() {
+    //Helper function to render UI
+    private void renderUi() {
+        //Iterate over all shape types
         for (ShapeType shapeType : ShapeType.values()) {
+            //Button object
             JPanel shapeButton;
+            //If component doesn't already contain a button pertaining to this shape type, need to create one and add it to the view
             if (!shapeButtons.containsKey(shapeType)) {
+                //Create button
                 shapeButton = new JPanel();
+                //Label text = ShapeType name
                 String labelText = Utils.capitalizeFirstLetter(shapeType.name());
+                //Add the label to button
                 shapeButton.add(new JLabel(labelText), Component.CENTER_ALIGNMENT);
+                //Add shape button to main component
                 this.add(shapeButton);
+                //Add button to button map
                 shapeButtons.put(shapeType, shapeButton);
+                //Add a listener to button to set current shape type when clicked
                 shapeButton.addMouseListener(new MouseInputAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         homescreenController.setCurrentShapeType(shapeType);
                     }
                 });
+            //If button has already been created, just retrieve it from buttons map
             } else {
                 shapeButton = shapeButtons.get(shapeType);
             }
+            //If the button pertains to the current shape type, make it have a lowered border
+            //Makes it look like the button is selected
             if (shapeType == clientModel.getCurrentShapeType()) {
                 shapeButton.setBorder(BorderFactory.createLoweredBevelBorder());
+            //Otherwise make the border raised
             } else {
                 shapeButton.setBorder(BorderFactory.createRaisedBevelBorder());
             }

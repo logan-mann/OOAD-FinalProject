@@ -16,6 +16,7 @@ import com.naiflogan.finalproject.client.shapes.ColorConstants;
 /***
  * This View displays a menu of color options
  * It displays a row of square buttons which when pushed, change the currentPenColor property of clientModel via HomescreenController
+ * Part of MVC PATTERN, implements our MVC View interface
  */
 public class PenSelectionView extends JPanel implements View {
 

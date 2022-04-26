@@ -10,15 +10,19 @@ import com.naiflogan.finalproject.client.canvas.CanvasPanel;
 import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.model.ClientModel;
 
+/**
+ * This class implements the main application UI View (contains canvas display, select canvas menu, pen selection menu, etc.)
+ * This is part of the MVC PATTERN and implements View
+ */
 public class HomescreenView extends JPanel implements View {
 
+    //Attributes for clientModel, homescreenController, and key child components
     private ClientModel clientModel;
     private HomescreenController homescreenController;
     private CanvasPanel canvasPanel;
     private PenSelectionView penSelectionView;
     private ShapeSelectionView shapeSelectionView;
     private SelectCanvasView selectCanvasView;
-
 
     public HomescreenView(ClientModel clientModel, HomescreenController homescreenController) {
         this.clientModel = clientModel;
@@ -113,6 +117,7 @@ public class HomescreenView extends JPanel implements View {
         this.add(holder);
     }
 
+    //When model is updated, render ui again and repaint component
     @Override
     public void update() {
         render();
