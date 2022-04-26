@@ -2,6 +2,10 @@ package com.naiflogan.finalproject.client.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class containing pertinent information about logged in user
+ * Contains username and JWT
+ */
 public class User {
 
     private String username;
