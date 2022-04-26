@@ -1,5 +1,8 @@
 package com.naiflogan.finalproject.client.shapes;
 
+/**
+ * Class containing constants for the various pen colors used in application
+ */
 public class ColorConstants {
 
     public static String RED = "0xFF0000";
@@ -9,6 +12,7 @@ public class ColorConstants {
     public static String BLUE = "0x0000FF";
     public static String PURPLE = "0x7F00FF";
 
+    //Enum for various colors, allows easy iteration through all color constants for creating buttons etc.
     public enum Colors {
         RED,
         ORANGE,
@@ -17,6 +21,7 @@ public class ColorConstants {
         BLUE,
         PURPLE;
 
+        //Helper function to convert an enum value to appropriate hex string
         public static String getColorHexValue(Colors color) {
             switch (color) {
                 case RED:

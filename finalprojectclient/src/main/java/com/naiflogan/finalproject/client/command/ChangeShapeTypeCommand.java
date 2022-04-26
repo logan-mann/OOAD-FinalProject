@@ -5,6 +5,11 @@ import com.naiflogan.finalproject.client.model.ClientModel;
 import com.naiflogan.finalproject.client.shapes.ShapeType;
 import com.naiflogan.finalproject.client.strategy.ShapeCreationStrategy;
 
+
+/**
+ * Command for changing current shape type being placed
+ * Part of COMMAND PATTTERN
+ */
 public class ChangeShapeTypeCommand implements Command {
 
     private ShapeType shapeType;
@@ -17,8 +22,9 @@ public class ChangeShapeTypeCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.println(shapeType);
+        //Get the proper shape creation strategy object for shapeType from factory
         ShapeCreationStrategy newStrategy = ShapeCreationStrategyFactory.getShapeCreationStrategy(shapeType);
+        //Update clientModel's current shapeType and shapeCreationStrategy, notify views
         clientModel.setCurrentShapeType(shapeType);
         clientModel.setShapeCreationStrategy(newStrategy);
         clientModel.notifyViews();

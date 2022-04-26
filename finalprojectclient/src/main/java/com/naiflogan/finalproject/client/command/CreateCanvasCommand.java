@@ -5,6 +5,10 @@ import com.naiflogan.finalproject.client.request.AddCanvasRequest;
 import com.naiflogan.finalproject.client.requestsender.BackendRequestSender;
 import com.naiflogan.finalproject.client.user.User;
 
+/**
+ * CreateCanvasCommand sends a request to create a new canvas to the backend
+ * Part of COMMAND PATTERN
+ */
 public class CreateCanvasCommand implements Command {
 
     private ClientModel clientModel;
@@ -19,9 +23,11 @@ public class CreateCanvasCommand implements Command {
 
     @Override
     public void execute() {
+        //Get the current logged in user from clientModel
         User user = clientModel.getUser();
-        System.out.println(isPublic);
+        //Build request object with canvas parameters and user's JWT
         AddCanvasRequest addCanvasRequest = new AddCanvasRequest(canvasName, user.getJsonWebToken(), isPublic);
+        //Send request to backend via request sender
         BackendRequestSender.getInstance().addCanvas(addCanvasRequest);
     }
 

@@ -2,6 +2,9 @@ package com.naiflogan.finalproject.client.request;
 
 import com.naiflogan.finalproject.client.shapes.Shape;
 
+/**
+ * Request object containing fields needed for request to /add_shape in backend service
+ */
 public class AddShapeRequest {
     private Shape shape;
     private String canvasName;

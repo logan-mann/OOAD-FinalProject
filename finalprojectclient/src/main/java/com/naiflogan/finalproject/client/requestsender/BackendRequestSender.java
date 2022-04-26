@@ -13,10 +13,16 @@ import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * This class contains the logic needed for sending any requests not related to user authentication to the backend service
+ * Uses SINGLETON pattern, as we only need one instance in the client
+ */
 @Service
 public class BackendRequestSender {
+    //RestTemplate from Spring, used for sending requests + receiving responses
     private final RestTemplate restTemplate;
 
+    //One instance as part of SINGLETON PATTERN
     private static BackendRequestSender instance = new BackendRequestSender();
 
     private BackendRequestSender() {
@@ -27,20 +33,31 @@ public class BackendRequestSender {
         return instance;
     }
 
+    /**
+     * Sends AddShapeRequest to backend service
+     * @param shapeRequest
+     */
     public void addShape(AddShapeRequest shapeRequest) {
         String url = Constants.backendApiUrl + "/add_shape";
         String res = this.restTemplate.postForObject(url, shapeRequest, String.class);
         System.out.println(res);
     }
 
+    /**
+     * Sends AddCanvasRequest to backend service
+     * @param canvasRequest
+     */
     public void addCanvas(AddCanvasRequest canvasRequest) {
         String url = Constants.backendApiUrl + "/add_canvas";
         String res = this.restTemplate.postForObject(url, canvasRequest, String.class);
-
-        //TODO - will change this to render result on GUI later
         System.out.println(res);
     }
 
+    /**
+     * Sends a request to backend service to get most up-to-date canvas information
+     * @param jwt Logged in user's JWT
+     * @return Map<String, Canvas> of all canvases in the backend available to user
+     */
     public Map<String, Canvas> getCanvases(String jwt) {
         String url = Constants.backendApiUrl + "/get_canvases";
         ParameterizedTypeReference<Map<String, Canvas>> responseType = 

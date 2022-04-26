@@ -1,5 +1,8 @@
 package com.naiflogan.finalproject.client.request;
 
+/**
+ * Request object containing fields needed for request to /login in backend service
+ */
 public class LoginRequest {
     private String username;
     private String password;

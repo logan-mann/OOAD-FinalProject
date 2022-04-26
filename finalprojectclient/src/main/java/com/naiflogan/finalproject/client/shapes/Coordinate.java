@@ -2,6 +2,9 @@ package com.naiflogan.finalproject.client.shapes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class containing (x,y) coordinates, used to place shapes on canvas
+ */
 public class Coordinate {
 
     public final int x;

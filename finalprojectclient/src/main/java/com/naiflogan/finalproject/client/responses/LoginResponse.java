@@ -3,6 +3,9 @@ package com.naiflogan.finalproject.client.responses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.naiflogan.finalproject.client.user.User;
 
+/**
+ * Class containing fields in login response from backend service
+ */
 public class LoginResponse {
 
     private User user;

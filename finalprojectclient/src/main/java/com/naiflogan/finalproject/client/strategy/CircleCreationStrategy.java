@@ -12,6 +12,9 @@ import com.naiflogan.finalproject.client.controller.HomescreenController;
 import com.naiflogan.finalproject.client.shapes.Circle;
 import com.naiflogan.finalproject.client.shapes.Coordinate;
 
+/**
+ * Implementation of ShapeCreationStrategy for Circles, part of STRATEGY PATTERN
+ */
 public class CircleCreationStrategy implements ShapeCreationStrategy {
 
     private int radius;

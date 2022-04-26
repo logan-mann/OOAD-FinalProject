@@ -4,6 +4,7 @@ package com.naiflogan.finalproject.client.command;
 //Invoker as part of COMMAND PATTERN, handles executing commands
 public class CommandInvoker {
 
+    //Invoker uses SINGLETON PATTERN, we only need a single invoker instance throughout client application
     private static CommandInvoker instance = new CommandInvoker();
 
     private Command command;
