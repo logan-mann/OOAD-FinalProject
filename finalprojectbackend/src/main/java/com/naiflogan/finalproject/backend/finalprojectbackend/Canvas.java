@@ -3,6 +3,7 @@ package com.naiflogan.finalproject.backend.finalprojectbackend;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
 
 /**
@@ -10,7 +11,6 @@ import com.naiflogan.finalproject.backend.finalprojectbackend.shapes.Shape;
  * Contains a list of shapes, whether it's public, who can access it, and a name
  */
 public class Canvas {
-
     List<Shape> shapes;
     boolean isPublic;
     List<String> allowedUsernames;
@@ -28,6 +28,17 @@ public class Canvas {
         this.isPublic = isPublic;
         this.allowedUsernames = allowedUsernames;   
         this.name = name; 
+    }
+
+    public Canvas(@JsonProperty("name") String name, 
+    @JsonProperty("public") boolean isPublic, 
+    @JsonProperty("allowedUsernames") List<String> allowedUsernames,
+    @JsonProperty("shapes") List<Shape> shapes) {
+        this.shapes = shapes;
+        this.allowedUsernames = allowedUsernames;
+        this.name = name;
+        this.isPublic = isPublic;
+
     }
 
     public List<Shape> getShapes() {

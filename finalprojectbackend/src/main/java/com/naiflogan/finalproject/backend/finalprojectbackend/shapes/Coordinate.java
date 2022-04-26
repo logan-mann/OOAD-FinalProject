@@ -12,7 +12,7 @@ public class Coordinate {
     @JsonProperty("y")
     public final int y;
 
-    public Coordinate(int x, int y) {
+    public Coordinate(@JsonProperty("x")int x,@JsonProperty("y")int y) {
         this.x = x;
         this.y = y;
     }

@@ -21,7 +21,6 @@ public abstract class Shape {
     }
 
     protected String hexColor;
-    public abstract ShapeType getType();  
 
     public String getHexColor() {
         return hexColor;

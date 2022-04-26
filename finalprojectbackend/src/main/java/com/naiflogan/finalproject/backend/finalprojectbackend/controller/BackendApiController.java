@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
  * RestController to handle requests to backend service
  * Implements Subject as part of OBSERVER PATTERN, used for Logging
@@ -63,7 +64,7 @@ public class BackendApiController implements Subject {
         final String username = jwtUtils.getUsernameFromJwt(jwt);
 
         //Log request
-        notifyObservers(new LoggingEvent("New AddShapeRequest: {canvasName: " + canvasName + ", username: " + username + ", shapeType: " + shape.getType() + "}", LoggingSeverity.INFO));
+        notifyObservers(new LoggingEvent("New AddShapeRequest: {canvasName: " + canvasName + ", username: " + username + ", shapeType: " + shape.getClass().getName() + "}", LoggingSeverity.INFO));
 
         //If canvas with canvasName passed doesnt exist, deny request
         if (!canvases.containsKey(canvasName)) {

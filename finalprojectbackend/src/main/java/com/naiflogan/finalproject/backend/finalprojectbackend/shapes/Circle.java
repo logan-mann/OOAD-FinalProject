@@ -1,5 +1,7 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.shapes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Extends abstract Shape class, is concrete class for "Circle" shape type
  */
@@ -9,7 +11,7 @@ public class Circle extends Shape {
     private Coordinate center;
 
     
-    public Circle(double radius, Coordinate center, String hexColor) {
+    public Circle(@JsonProperty("radius")double radius,@JsonProperty("center")Coordinate center,@JsonProperty("hexColor")String hexColor) {
         this.radius = radius;
         this.center = center;
         this.hexColor = hexColor;
@@ -21,10 +23,6 @@ public class Circle extends Shape {
 
     public Coordinate getCenter() {
         return this.center;
-    }
-
-    public ShapeType getType() {
-        return ShapeType.CIRCLE;
     }
 
     public String toString() {

@@ -16,7 +16,10 @@ public class Rectangle extends Shape {
     @JsonProperty("center")
     private Coordinate center;
 
-    public Rectangle(int length, int height, Coordinate center, String hexColor) {
+    public Rectangle(@JsonProperty("length") int length, 
+    @JsonProperty("height") int height, 
+    @JsonProperty("center")Coordinate center, 
+    @JsonProperty("hexColor") String hexColor) {
         this.length = length;
         this.height = height;
         this.center = center;
@@ -44,10 +47,6 @@ public class Rectangle extends Shape {
 
     public Coordinate getCenter() {
         return this.center;
-    }
-
-    public ShapeType getType() {
-        return ShapeType.RECTANGLE;
     }
 
     public String toString() {

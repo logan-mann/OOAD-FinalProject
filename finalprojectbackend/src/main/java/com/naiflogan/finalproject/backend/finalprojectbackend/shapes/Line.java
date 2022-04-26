@@ -1,5 +1,7 @@
 package com.naiflogan.finalproject.backend.finalprojectbackend.shapes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Extends abstract Shape class, is concrete class for "Line" shape type
  */
@@ -8,7 +10,7 @@ public class Line extends Shape {
     private Coordinate start;
     private Coordinate end;
 
-    public Line(Coordinate start, Coordinate end) {
+    public Line(@JsonProperty("start")Coordinate start,@JsonProperty("end")Coordinate end) {
         this.start = start;
         this.end = end;
     }
@@ -19,10 +21,6 @@ public class Line extends Shape {
 
     public Coordinate getEnd() {
         return end;
-    }
-
-    public ShapeType getType() {
-        return ShapeType.LINE;
     }
     
 }
