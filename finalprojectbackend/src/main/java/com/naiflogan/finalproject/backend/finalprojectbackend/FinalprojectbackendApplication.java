@@ -25,6 +25,7 @@ public class FinalprojectbackendApplication {
 		return StateSaver.loadCanvasState();
 	}
 
+	//Create bean to save canvas state when context is closed
 	@Bean
 	TerminateBean terminateBean() {
 		return new TerminateBean();

@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.naiflogan.finalproject.backend.finalprojectbackend.Canvas;
 
 
+/**
+ * Class to save and load canvas state from json file
+ */
 public class StateSaver {
 
     private final static ObjectMapper objectMapper = new ObjectMapper();
