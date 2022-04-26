@@ -1,5 +1,6 @@
 Project name: CloudCanvas
 Team members: Logan Mann, Naif Alassaf
+Language Version: Java 8
 
 Overview:
 
