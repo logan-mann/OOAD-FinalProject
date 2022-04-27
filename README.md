@@ -6,6 +6,8 @@ Overview:
 
 CloudCanvas is a shared canvas application that allows the user to draw artwork on one of a number of shared canvases hosted by the service. As the user draws on the canvas the application updates the state of the canvas on the server. Multiple users can draw on a canvas at the same time and create artwork together.
 
+Link to Demonstration Video: https://drive.google.com/file/d/1GZ-JugPNUA_iG6VqfY6Kcho0fl3pS-9E/view?usp=sharing
+
 Instructions to Build and Run:
 
 We currently have a database and backend service deployed on AWS.
