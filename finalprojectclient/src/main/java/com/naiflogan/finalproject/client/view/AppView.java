@@ -36,7 +36,7 @@ public class AppView extends JPanel implements View{
         //Create new HomescreenView, pass in clientModel and homescreenController
         HomescreenView homescreenView = new HomescreenView(clientModel, homescreenController);
         //Create new CreateCanvasView, pass in homescreenController
-        CreateCanvasView createCanvasView = new CreateCanvasView(homescreenController);
+        CreateCanvasView createCanvasView = new CreateCanvasView(homescreenController, clientModel);
         //Create new CardLayout panel to swap between views
         cards = new JPanel(new CardLayout());
         //Add all views with their respective tags

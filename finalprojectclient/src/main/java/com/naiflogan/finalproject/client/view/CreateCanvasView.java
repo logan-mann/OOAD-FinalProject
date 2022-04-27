@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 import com.naiflogan.finalproject.client.controller.HomescreenController;
+import com.naiflogan.finalproject.client.model.ClientModel;
 
 /**
  * This class implements the CreateCanvas UI View
@@ -15,12 +16,15 @@ public class CreateCanvasView extends JPanel implements View {
     //HomescreenController for sending requests/updating model
     private HomescreenController homescreenController;
 
+    private ClientModel clientModel;
+
     //State variables for Canvas Creation form fields
     private boolean canvasNameFocused = false;
     private boolean isPublic = true;
 
-    public CreateCanvasView(HomescreenController homescreenController) {
+    public CreateCanvasView(HomescreenController homescreenController, ClientModel clientModel) {
         this.homescreenController = homescreenController;
+        this.clientModel = clientModel;
         renderUi();
     }
 
@@ -85,7 +89,13 @@ public class CreateCanvasView extends JPanel implements View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Create new canvas via homescreen controller
-                homescreenController.createNewCanvas(canvasNameField.getText(), isPublic);
+                String canvasName = canvasNameField.getText();
+                if (clientModel.getCanvases().containsKey(canvasName)) {
+                    JOptionPane.showMessageDialog(centerPanel, "Canvas with that name already exists!");
+                } else {
+                    homescreenController.createNewCanvas(canvasNameField.getText(), isPublic);
+
+                }
             }
         });
 
