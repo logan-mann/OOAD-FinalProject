@@ -9,7 +9,7 @@ CloudCanvas is a shared canvas application that allows the user to draw artwork 
 Instructions to Build and Run:
 
 We currently have a database and backend service deployed on AWS.
-To run the client against the live backend service in the cloud, simply clone the project, navigate to the finalprojectclient directory, and run ```./run_frontent_awsbackend.sh```. This shell script will set the appropriate environment variables to connect to the backend on AWS, build and run the client.
+To run the client against the live backend service in the cloud, simply clone the project, and run ```java -jar finalprojectclient-1.0.jar``` to execute the jar file found at the root project directory. Or if you have Maven installed and you'd like to build the project yourself, navigate to the finalprojectclient directory, and run ```./run_frontend_awsbackend.sh```. This shell script will set the appropriate environment variables to connect to the backend on AWS, build and run the client.
 
 Alternatively if you'd like to run a full-stack local deployment, we have provided a docker-compose file to create a local postgres instance, a run_backend.sh script to deploy a local backend instance against the local postgres database, and a run_frontend_localbackend.sh script to run a client against a local backend.
 
