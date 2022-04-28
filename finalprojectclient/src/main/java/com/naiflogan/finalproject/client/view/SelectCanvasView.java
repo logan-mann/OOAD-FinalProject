@@ -42,6 +42,8 @@ public class SelectCanvasView extends JPanel implements View {
         JScrollPane scrollPane = new JScrollPane(canvasList);
         scrollPane.setPreferredSize(new Dimension(200,500));
         scrollPane.getVerticalScrollBar().setUnitIncrement(8);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
 
         //Add Panel to hold scroll pane
         JPanel scrollHolder = new JPanel();
